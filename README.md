@@ -93,3 +93,14 @@ Created by Maximilian Schwarzmüller
         ```
         You can also use a wildcard like: `*.dev.ts`. Or like: `**/*dev.ts`. By default "node_modules" is excluded.
     - You can also `include` files. But then if you ommit one, it will not be compiled.
+    - In `tsconfig.json` `"lib": []` lets you specify which default objects and features TS knows. eg with the DOM. Like how does TS know what a  `button` is...? So, if it's not set in `config` it takes the defaults according to the `target`
+    This is the default:
+    ```js
+      "lib": [
+      "DOM",
+      "ES6",
+      "dom.iterable",
+      "ScriptHost"
+    ], 
+    ```
+

@@ -1,3 +1,6 @@
-const userName = 'Fotios'
+const button = document.querySelector('botton')!;
 
-console.log('Time to get started...!' + userName);
+button.addEventListener('click', () => {
+    console.log('Clicked');
+    
+})
