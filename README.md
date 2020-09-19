@@ -79,4 +79,6 @@ Created by Maximilian Schwarzmüller
             ```
         - `unknown` It's a bit more restrictive then `any`. eg you cannot assign an unknown value to a varible of string type. But you can with `any`. 
         - `never` eg If a function doesn't return anything but also throws an error...  
-
+3. **The TypeScript Compiler (and its Configuration)**
+    - run `tsc app.ts -w` to enter watch mode. You can quite with `ctrl + C`.
+    - run `tsc --init` to tell TS that all the files here are one project. It will create the  `tsconfig.json` file ...
