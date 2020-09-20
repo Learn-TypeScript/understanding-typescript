@@ -102,4 +102,13 @@ Created by Maximilian Schwarzmüller
         "ScriptHost"
         ], 
         ```
+    - `allowJs` set js files you want to be compiled
+    - `"sourceMap": true`, generates extra files that the browsers car read and in this way you get also the .ts files in chrome dev tools, which helps a lot with debuging.
+    - `"outDir": "./"` : You can move all the .js files to a `dist` folder and specify the path here, so TS will know where to lool. Don't forget to change the path also in index.js
+    - `"rootDir": "./"` Set the folder where the .ts files are.
+    - `"noEmitOnError": true`: Does not compile the files if there is an error.
+    - These links might also be interesting:
+        - tsconfig Docs: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html
+        - Compiler Config Docs: https://www.typescriptlang.org/docs/handbook/compiler-options.html
+        - VS Code TS Debugging: https://code.visualstudio.com/docs/typescript/typescript-debugging    
 
