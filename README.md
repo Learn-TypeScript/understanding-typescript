@@ -7,19 +7,18 @@ Created by Maximilian Schwarzmüller
 ### Notes:
 
 1. **Getting Started**
-
-- What is JS:
-  - TS is a JavaScript superset. Adds new features and advantades to JS. A language building up on JS.
+- What is TS:
+  - TS is a JavaScript superset. Adds new features and advantages to JS. A language building up on JS.
   - Browser can not execute it! TS is a compiler which you run over your code to compile to JS.
-  - The TS compiler compiles the new features to JS "workarounds" and possible errors are thrown. This can give you a nices syntax!
+  - The TS compiler compiles the new features to JS "workarounds" and possible errors are thrown. This can give you a nicer syntax!
 - TS adds:
-  - **types**. So you can identify errors earlier.
+  - Types: So you can identify errors earlier.
   - Next-gen JS features (compliled down for older Browsers).
   - Non-JS features like Interfaces or Generics.
   - Meta-Programming features like Decorators.
-  - / has Rich Configuration Options
+  - TS has Rich Configuration Options
   - Modern Tooling that helps even in non TS Projects. e.g. VS code, uses TS in JS projects...
-  - Use of **lite-server**
+- Use of **lite-server**
 
 2. **TypeScript Basics & Basic Types**
    - Core Types:
@@ -78,9 +77,9 @@ Created by Maximilian Schwarzmüller
             })
             ```
         - `unknown` It's a bit more restrictive then `any`. eg you cannot assign an unknown value to a varible of string type. But you can with `any`. 
-        - `never` eg If a function doesn't return anything but also throws an error...  
+        - `never` eg If a function doesn't return anything and also throws an error... then this function doesn't return anything eg cb: (num: number) => never 
 3. **The TypeScript Compiler (and its Configuration)**
-    - run `tsc app.ts -w` to enter watch mode. You can quite with `ctrl + C`.
+    - run `tsc app.ts -w` to enter watch mode. You can quite with `ctrl + C`. With watch mode you don't have to run `tsc fileName.ts` all the time. It runs automatically with saving the file.
     - run `tsc --init` to tell TS that all the files here are one project. It will create the  `tsconfig.json` file ...
     - You can exclude files from compiling by puting them in the `exclude` in `tsconfig.json` 
       eg:
@@ -91,16 +90,16 @@ Created by Maximilian Schwarzmüller
             ]
         }
         ```
-        You can also use a wildcard like: `*.dev.ts`. Or like: `**/*dev.ts`. By default "node_modules" is excluded.
+        You can also use a wildcard like: `*.dev.ts`. Or like: `**/*dev.ts`. Note: by default "node_modules" is excluded.
     - You can also `include` files. But then if you ommit one, it will not be compiled.
-    - In `tsconfig.json` `"lib": []` lets you specify which default objects and features TS knows. eg with the DOM. Like how does TS know what a  `button` is...? So, if it's not set in `config` it takes the defaults according to the `target`
+    - In `tsconfig.json` `"lib": []` lets you specify which default objects and features TS knows. eg with the DOM. Like how does TS know what a  `button` is...? So, if it's not set in `config` it takes the defaults according to the `target`.
     This is the default:
-    ```js
-      "lib": [
-      "DOM",
-      "ES6",
-      "dom.iterable",
-      "ScriptHost"
-    ], 
-    ```
+        ```js
+        "lib": [
+        "DOM",
+        "ES6",
+        "dom.iterable",
+        "ScriptHost"
+        ], 
+        ```
 
