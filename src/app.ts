@@ -1,5 +1,6 @@
 
 class Department {
+    static fiscalYear = 2020
     // a field of the class
     // name: string; 
     // private employees: string[] = [];
@@ -9,6 +10,10 @@ class Department {
     // readonly exist only in TS
     constructor(private readonly id: string, public name: string) {
         // this.name = n;
+    }
+
+    static createEmployee(name: string) {
+        return {name: name}
     }
 
     // this: Department = describe has to be called by an obj of type: Department
@@ -78,6 +83,10 @@ class AccountingDepartment extends Department {
         
     }
 }
+
+const employee1 = Department.createEmployee('Max');
+console.log('employee1', employee1, Department.fiscalYear);
+
 
  const it = new ITDepartment('d1', ['Max']);
 
