@@ -1,5 +1,5 @@
 
-class Department {
+abstract class Department {
     static fiscalYear = 2020
     // a field of the class
     // name: string; 
@@ -8,7 +8,7 @@ class Department {
 
     // constructor method
     // readonly exist only in TS
-    constructor(private readonly id: string, public name: string) {
+    constructor(protected readonly id: string, public name: string) {
         // this.name = n;
     }
 
@@ -17,9 +17,10 @@ class Department {
     }
 
     // this: Department = describe has to be called by an obj of type: Department
-    describe(this: Department) {
-        console.log(`Deparment:  (${this.id}) ${this.name}`);
-    }
+    abstract describe(this: Department): void
+    // {
+        // console.log(`Deparment:  (${this.id}) ${this.name}`);
+    // }
 
     addEmployee(employee: string) {
         this.employees.push(employee)
@@ -37,6 +38,10 @@ class ITDepartment extends Department {
     constructor(id: string, admins: string[]) {
         super(id, 'IT');
         this.admins = admins
+    }
+    describe() {
+        console.log('IT Department - ID ', this.id );
+        
     }
 }
 
@@ -60,6 +65,10 @@ class AccountingDepartment extends Department {
     constructor(id: string, private reports: string[]) {
         super(id, 'Accounting');
         this.lastReport = reports[0]
+    }
+
+    describe() {
+        console.log('Accounting Department - ID ', this.id);
     }
 
     addEmployee(name: string){
@@ -99,16 +108,18 @@ console.log('employee1', employee1, Department.fiscalYear);
 
  const accounting = new AccountingDepartment('d2', [])
 
- console.log(accounting);
+//  console.log(accounting);
  
  
  accounting.addReport('Something went wrong!')
  accounting.mostRecentReport = 'Year end report'
  console.log('accounting.mostRecentReport', accounting.mostRecentReport);
- accounting.printReports()
  accounting.addEmployee('Max')
  accounting.addEmployee('Fotios')
- accounting.printEmployeeInformation()
+
+//  accounting.printReports()
+//  accounting.printEmployeeInformation()
+accounting.describe()
 
 //  const accountingCopy = { name: 'DUMMY', describe: accounting.describe}
 
