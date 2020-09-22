@@ -6,6 +6,10 @@ Created by Maximilian Schwarzmüller
 
 ### Notes:
 
+tsc src/app.ts --watch
+or
+tsc src/app.ts -w
+
 1. **Getting Started**
 - What is TS:
   - TS is a JavaScript superset. Adds new features and advantages to JS. A language building up on JS.
