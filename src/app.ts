@@ -74,10 +74,43 @@ const v2 = new Truck();
 
 function useVehicle(vehicle: Vehicle) {
     vehicle.drive()
-    if ('loadCargo' in vehicle) {
+    if (vehicle instanceof Truck) {
         vehicle.loadCargo(1000)
     }
 }
 
 useVehicle(v1)
 useVehicle(v2)
+
+interface Bird {
+    // this is a literal type
+    type: 'bird'; // or kind: 'bird'
+    flyingSpeed: number;
+}
+interface Horse {
+    type: 'horse';
+    runningSpeed: number;
+}
+
+type Animal = Bird | Horse;
+
+function moveAnimal(animal: Animal) {
+    // We cannot work with instanceof because Bird is an interface and it does not compile to JS
+    // if ('flyingSpeed' in animal) {
+    //     console.log('Moving with speed: ' + animal.flyingSpeed);
+    // }
+    let speed;
+    switch (animal.type) {
+        case 'bird':
+            speed = animal.flyingSpeed
+            break;
+        case 'horse':
+            speed = animal.runningSpeed
+            break;
+        default:
+            break;
+    }
+    console.log('Moving with speed: ' + speed);
+}
+
+moveAnimal({type: 'bird', flyingSpeed: 10})

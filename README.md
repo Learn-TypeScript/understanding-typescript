@@ -131,10 +131,12 @@ tsc -w
         - More on (JS) Classes: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
         - More on TS Interfaces: https://www.typescriptlang.org/docs/handbook/interfaces.html
 6.  - **Advanced Types**
-        - **intersection types**: Allow as to combine other types. They are close related to interface inheritance. But with interfaces we use more code. Note: You can use intersection types not only with objects but with any types. eg with union types you get the types that 2 union types have in common. 
-        - **type guards**: 
-         1. `typeof`
-         2. `in`
-         3. `instanceof`
+        - Intersection types: Allow as to combine other types. They are close related to interface inheritance. But with interfaces we use more code. Note: You can use intersection types not only with objects but with any types. eg with union types you get the types that 2 union types have in common. 
+        - Type guards: 
+            1. `typeof`
+            2. `in`
+            3. `instanceof`
+        - Discriminated Unions: It's a pattern to use with union types and make working with type guards easier.
+
          
 
