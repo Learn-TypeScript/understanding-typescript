@@ -131,6 +131,7 @@ tsc -w
         - More on (JS) Classes: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
         - More on TS Interfaces: https://www.typescriptlang.org/docs/handbook/interfaces.html
 6.  - **Advanced Types**
-        - Intersection types: Allow as to combine other types. They are close related to interface inheritance. But with interfaces we use more code. Note: You can use intersection types not only with objects but with any types. eg with union types you get the types that 2 union types have in common. 
+        - **intersection types**: Allow as to combine other types. They are close related to interface inheritance. But with interfaces we use more code. Note: You can use intersection types not only with objects but with any types. eg with union types you get the types that 2 union types have in common. 
+        - **type guards**: 
          
 

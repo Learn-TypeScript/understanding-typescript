@@ -24,3 +24,11 @@ type Numeric = number | boolean;
 
 // describes the types they have in common
 type Universal = Combinable & Numeric
+
+function add(a: Combinable, b: Combinable) {
+    // type guard using typeof
+    if (typeof a === 'string' || typeof b === 'string') {
+        return a.toString() + b.toString()
+    } 
+    return a + b;
+}
