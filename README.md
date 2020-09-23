@@ -136,5 +136,6 @@ or
             3. `instanceof`
         - Discriminated Unions: It's a pattern to use with union types and make working with type guards easier.
         - Type Casting: You can say TS that some value is of specifiek type!
+        - Index Properties: Allows to create objects that are more flexible regarding the properties they might hold.
          
 

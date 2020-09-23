@@ -123,3 +123,21 @@ const userInputElement = document.getElementById('user-input') as HTMLInputEleme
 // }
 
 userInputElement.value = 'Hi there';
+
+// -----------------------------------
+// Validate input fields and show some proper message if error occur.
+// Let interface be generic so you can check differnt type of fields (not only email and userName)
+// The values should be string, but we don't want to specify the number of the properties neither their names.
+// Use index types
+interface ErrorContainer { // We could use: {email: 'Note a valid email', username: 'Must start with a character!'}
+    // Note in an obj you may have string, number or symbol. No boolean.   
+    [prop: string]: string;
+    // We can add also predefined properties as long as they are of the same type.
+    // id: string;
+}
+
+const errorBag: ErrorContainer = {
+    // 1: 'Not a valid email', // Also OK to use a number as name but not vice versa.
+    email: 'Not a valid email',
+    username: 'Must start with a character!'
+}
