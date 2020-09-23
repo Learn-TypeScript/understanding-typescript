@@ -18,3 +18,9 @@ const e1: ElevatedEmployee = {
     privileges: ['create-server'],
     startDate: new Date()
 }
+
+type Combinable = string | number;
+type Numeric = number | boolean;
+
+// describes the types they have in common
+type Universal = Combinable & Numeric

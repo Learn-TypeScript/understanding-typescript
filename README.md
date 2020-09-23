@@ -83,7 +83,7 @@ tsc -w
             })
             ```
         - `unknown` It's a bit more restrictive then `any`. eg you cannot assign an unknown value to a varible of string type. But you can with `any`. 
-        - `never` eg If a function doesn't return anything and also throws an error... then this function doesn't return anything eg cb: (num: number) => never 
+        - `never` If a function doesn't return anything and also throws an error... then this function doesn't return anything eg cb: (num: number) => never 
 3. **The TypeScript Compiler (and its Configuration)**
     - run `tsc app.ts -w` to enter watch mode. You can quite with `ctrl + C`. With watch mode you don't have to run `tsc fileName.ts` all the time. It runs automatically with saving the file.
     - run `tsc --init` to tell TS that all the files here are one project. It will create the  `tsconfig.json` file ...
@@ -131,6 +131,6 @@ tsc -w
         - More on (JS) Classes: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
         - More on TS Interfaces: https://www.typescriptlang.org/docs/handbook/interfaces.html
 6.  - **Advanced Types**
-        - Intersection types: Allow as to combine other types. They are close related to interface inheritance. But with interfaces we use more code.
+        - Intersection types: Allow as to combine other types. They are close related to interface inheritance. But with interfaces we use more code. Note: You can use intersection types not only with objects but with any types. eg with union types you get the types that 2 union types have in common. 
          
 
