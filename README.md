@@ -133,5 +133,8 @@ tsc -w
 6.  - **Advanced Types**
         - **intersection types**: Allow as to combine other types. They are close related to interface inheritance. But with interfaces we use more code. Note: You can use intersection types not only with objects but with any types. eg with union types you get the types that 2 union types have in common. 
         - **type guards**: 
+         1. `typeof`
+         2. `in`
+         3. `instanceof`
          
 
