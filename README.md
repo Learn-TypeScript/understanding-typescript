@@ -5,27 +5,26 @@ Don't limit the Usage of TypeScript to Angular! Learn the Basics, its Features, 
 Created by Maximilian Schwarzmüller
 
 ### Notes:
-
-tsc src/app.ts --watch
+run: 
+`tsc src/app.ts --watch`
 or
-tsc src/app.ts -w
+`tsc src/app.ts -w`
 or 
-tsc -w
+`tsc -w`
 
 1. **Getting Started**
-- What is TS:
-  - TS is a JavaScript superset. Adds new features and advantages to JS. A language building up on JS.
-  - Browser can not execute it! TS is a compiler which you run over your code to compile to JS.
-  - The TS compiler compiles the new features to JS "workarounds" and possible errors are thrown. This can give you a nicer syntax!
-- TS adds:
-  - Types: So you can identify errors earlier.
-  - Next-gen JS features (compliled down for older Browsers).
-  - Non-JS features like Interfaces or Generics.
-  - Meta-Programming features like Decorators.
-  - TS has Rich Configuration Options
-  - Modern Tooling that helps even in non TS Projects. e.g. VS code, uses TS in JS projects...
-- Use of **lite-server**
-
+    - What is TS:
+        - TS is a JavaScript superset. Adds new features and advantages to JS. A language building up on JS.
+        - Browsers can not execute it! TS is a compiler which you run over your code to compile to JS.
+        - The TS compiler compiles the new features to JS "workarounds" and possible errors are thrown. This can give you a nicer syntax!
+    - TS adds:
+        - Types: So you can identify errors earlier.
+        - Next-gen JS features (compliled down for older Browsers).
+        - Non-JS features like Interfaces or Generics.
+        - Meta-Programming features like Decorators.
+        - TS has Rich Configuration Options
+        - Modern Tooling that helps even in non TS Projects. e.g. VS code, uses TS in JS projects...
+    - Use of `lite-server`
 2. **TypeScript Basics & Basic Types**
    - Core Types:
      - `number` no floats etc.
@@ -50,7 +49,6 @@ tsc -w
             // This allows you to avoid unnecessary repetition and manage types centrally.
 
             // For example, you can simplify this code:
-
             function greet(user: { name: string; age: number }) {
             console.log('Hi, I am ' + user.name);
             }
@@ -70,22 +68,22 @@ tsc -w
             return checkAge > user.age;
             }
         ```
-        - `Functions` as Types: eg `let combineValues: Function` or `let combineValues: (a: number, b: number) => number`
-        - `Function Types & Callbacks`: 
-            ```js 
-            funtion addAndHandle(n1: number, n2: number, cb: (num: number) => void) {
-                const result = n1 + n2;
-                cb(result)
-            }
+    - `Functions` as Types: eg `let combineValues: Function` or `let combineValues: (a: number, b: number) => number`
+    - `Function Types & Callbacks`: 
+        ```js 
+        funtion addAndHandle(n1: number, n2: number, cb: (num: number) => void) {
+            const result = n1 + n2;
+            cb(result)
+        }
 
-            addAndHandle(10, 20, result => {
-                console.log(result);
-            })
-            ```
-        - `unknown` It's a bit more restrictive then `any`. eg you cannot assign an unknown value to a varible of string type. But you can with `any`. 
-        - `never` If a function doesn't return anything and also throws an error... then this function doesn't return anything eg cb: (num: number) => never 
+        addAndHandle(10, 20, result => {
+            console.log(result);
+        })
+        ```
+    - `unknown` It's a bit more restrictive then `any`. eg you cannot assign an unknown value to a varible of string type. But you can with `any`. 
+    - `never` If a function doesn't return anything and also throws an error... then this function doesn't return anything eg cb: (num: number) => never 
 3. **The TypeScript Compiler (and its Configuration)**
-    - run `tsc app.ts -w` to enter watch mode. You can quite with `ctrl + C`. With watch mode you don't have to run `tsc fileName.ts` all the time. It runs automatically with saving the file.
+    - run `tsc app.ts -w` to enter watch mode. You can quite with `ctrl + C`. With watch mode you don't have to run `tsc fileName.ts` all the time. It runs automatically when saving the file.
     - run `tsc --init` to tell TS that all the files here are one project. It will create the  `tsconfig.json` file ...
     - You can exclude files from compiling by puting them in the `exclude` in `tsconfig.json` 
       eg:
@@ -96,7 +94,7 @@ tsc -w
             ]
         }
         ```
-        You can also use a wildcard like: `*.dev.ts`. Or like: `**/*dev.ts`. Note: by default "node_modules" is excluded.
+      You can also use a wildcard like: `*.dev.ts`. Or like: `**/*dev.ts`. Note: by default "node_modules" is excluded.
     - You can also `include` files. But then if you ommit one, it will not be compiled.
     - In `tsconfig.json` `"lib": []` lets you specify which default objects and features TS knows. eg with the DOM. Like how does TS know what a  `button` is...? So, if it's not set in `config` it takes the defaults according to the `target`.
     This is the default:
@@ -137,6 +135,6 @@ tsc -w
             2. `in`
             3. `instanceof`
         - Discriminated Unions: It's a pattern to use with union types and make working with type guards easier.
-
+        - Type Casting: You can say TS that some value is of specifiek type!
          
 
