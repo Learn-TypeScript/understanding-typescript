@@ -126,5 +126,6 @@ tsc -w
             2. You can implement an interface inside a class. It can be used as a contract a class can implement and then has to adhere to. Then you can share an interface among different classes. Note: A class may implement multiple interfaces. 
             3. We can implement `Inheritance` in interfaces by extending in an interface another one, or even multiple.
             4. With Interfaces you can describe the structure of a function too. But probably it's a bit more common to use custom types.
+            5. Interfaces: mark properties as optional by adding a `?` after the property. Note: You can also mark methods as optional: `myMethod?(){}`. And also parameters of methods...
 
 
