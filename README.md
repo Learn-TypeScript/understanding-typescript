@@ -124,5 +124,6 @@ tsc -w
          - Differences between `interfaces` and `custom types`:
             1. Interfaces only describe the structure of an object. In custom types you can use also store other things like `union types` etc. So when using an interface it's clear you want to describe the structure of an object.
             2. You can implement an interface inside a class. It can be used as a contract a class can implement and then has to adhere to. Then you can share an interface among different classes. Note: A class may implement multiple interfaces. 
+            3. We can implement `Inheritance` in interfaces.
 
 
