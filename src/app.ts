@@ -1,15 +1,17 @@
-type Admin = {
+interface Admin {
     name: string;
     privileges: string[];
 }
 
-type Empoloyee = {
+interface Employee {
     name: string;
     startDate: Date;
 }
 
+interface ElevatedEmployee extends Admin, Employee {}
+
 // combine types with intersection types
-type ElevatedEmployee = Admin & Empoloyee;
+// type ElevatedEmployee = Admin & Employee;
 
 const e1: ElevatedEmployee = {
     name: 'Max',
