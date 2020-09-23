@@ -127,5 +127,9 @@ tsc -w
             3. We can implement `Inheritance` in interfaces by extending in an interface another one, or even multiple.
             4. With Interfaces you can describe the structure of a function too. But probably it's a bit more common to use custom types.
             5. Interfaces: mark properties as optional by adding a `?` after the property. Note: You can also mark methods as optional: `myMethod?(){}`. And also parameters of methods...
-
+    - These links might also be interesting:
+        - More on (JS) Classes: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
+        - More on TS Interfaces: https://www.typescriptlang.org/docs/handbook/interfaces.html
+6.  - **Advanced Types**
+    
 
