@@ -9,6 +9,8 @@ Created by Maximilian Schwarzmüller
 tsc src/app.ts --watch
 or
 tsc src/app.ts -w
+or 
+tsc -w
 
 1. **Getting Started**
 - What is TS:
@@ -118,5 +120,9 @@ tsc src/app.ts -w
 4. **Next-generation JavaScript & TypeScript** 
     - About let, const etc...
 5.  - **Classes & Interfaces** ...
-    - 
+        - An interface describes the structure of an object. Use it to type-check an object. But why not use just `custom types` then?
+         - Differences between `interfaces` and `custom types`:
+            1. Interfaces only describe the structure of an object. In custom types you can use also store other things like `union types` etc. So when using an interface it's clear you want to describe the structure of an object.
+            2. You can implement an interface inside a class. It can be used as a contract a class can implement and then has to adhere to. Then you can share an interface among different classes. Note: A class may implement multiple interfaces. 
+
 
