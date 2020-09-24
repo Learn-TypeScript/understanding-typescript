@@ -51,4 +51,31 @@ function extractAndConvert<T extends object, U extends keyof T> (obj: T, key: U)
 extractAndConvert({name: 'Max'}, 'name')
 
 //---------------------------------
+// Generic Classes
+class DataStorage<T> {
+    private data: T[] = [];
+
+    addItem(item: T) {
+        this.data.push(item)
+    }
+
+    removeItem(item: T) {
+        this.data.splice(this.data.indexOf(item), 1)
+    }
+
+    getItems() {
+        return [...this.data]
+    }
+}
+
+// Create different storages
+const textStorage = new DataStorage<string>();
+textStorage.addItem('Max');
+textStorage.addItem('Manu');
+textStorage.removeItem('Max')
+console.log(textStorage.getItems())
+
+const textStorage2 = new DataStorage<number>();
+const textStorage3 = new DataStorage<number | string>();
+
 
