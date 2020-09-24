@@ -142,4 +142,5 @@ or
         - Nullish Coalescing: Manage nullish or undefined data.
         - These links might also be interesting:
             - More on Advanced Types: https://www.typescriptlang.org/docs/handbook/advanced-types.html
-
+7.  - **Generics**
+        - Generics is a type which is connected to another type so TS gives us better support.
