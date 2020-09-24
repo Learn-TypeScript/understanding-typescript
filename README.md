@@ -137,5 +137,6 @@ or
         - Discriminated Unions: It's a pattern to use with union types and make working with type guards easier.
         - Type Casting: You can say TS that some value is of specifiek type!
         - Index Properties: Allows to create objects that are more flexible regarding the properties they might hold.
+        - Function Overloads: Allows us to define multiple function signatures, for one function. ie multiple ways of calling a function with different parameters. Use it when TS cannot infer correctly the return type.
          
 
