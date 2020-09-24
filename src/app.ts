@@ -49,6 +49,19 @@ const fetchedUserData = {
 
 console.log(fetchedUserData?.job?.title);
 
+ // ---------------------------------
+// Nullish Coalescing:
+// try the following: null, undefined, ''
+// Note:  an empty string would be fasly so in case of || DEFAULT will be printed out.
+const userInput = '';
+
+// const storedData = userInput || 'DEFAULT';
+// nullish coalescing detects only  null or undefined. 
+const storedData = userInput ?? 'DEFAULT';
+
+console.log(storedData);
+
+
 
 // type UnknownenEmployee = Employee | Admin;
 

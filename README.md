@@ -139,4 +139,7 @@ or
         - Index Properties: Allows to create objects that are more flexible regarding the properties they might hold.
         - Function Overloads: Allows us to define multiple function signatures, for one function. ie multiple ways of calling a function with different parameters. Use it when TS cannot infer correctly the return type.
         - Optional Chaining: Let's say you get data from a back end, and you don't know if in an object a certain property is defined. Use optional chaining to not get a runtime error.
+        - Nullish Coalescing: Manage nullish or undefined data.
+        - These links might also be interesting:
+            - More on Advanced Types: https://www.typescriptlang.org/docs/handbook/advanced-types.html
 
