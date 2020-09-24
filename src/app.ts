@@ -52,7 +52,8 @@ extractAndConvert({name: 'Max'}, 'name')
 
 //---------------------------------
 // Generic Classes
-class DataStorage<T> {
+// Better set ...extends string | number | boolean so it won't be able to work with objects. 
+class DataStorage<T extends string | number | boolean> {
     private data: T[] = [];
 
     addItem(item: T) {
@@ -60,6 +61,9 @@ class DataStorage<T> {
     }
 
     removeItem(item: T) {
+        if (this.data.indexOf(item) === -1) {
+            return;
+        }
         this.data.splice(this.data.indexOf(item), 1)
     }
 
@@ -78,4 +82,21 @@ console.log(textStorage.getItems())
 const textStorage2 = new DataStorage<number>();
 const textStorage3 = new DataStorage<number | string>();
 
+// Working with objects:
+// Objects work with reference types.
 
+const objStorage = new DataStorage<object>()
+objStorage.addItem({name: 'Max'})
+objStorage.addItem({name: 'Manu'})
+//...
+// Technically {name: 'Max'} is a new object  and has a different address.
+// So indexOf returns -1 because it doesn't find it, thus it starts at the end of the array
+// and splice removes the last item of the array!
+console.log(objStorage.getItems())
+// But if we use the same object then it will work.
+const maxObj = {name: 'Max'}
+objStorage.addItem(maxObj)
+console.log(objStorage.getItems())
+objStorage.removeItem(maxObj)
+
+console.log(objStorage.getItems())
