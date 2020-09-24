@@ -41,6 +41,15 @@ const result = add1(1, 5)
 const result3 = add1('Max', ' Schwarz')
 result3.split(' ')
 
+const fetchedUserData = {
+    id: 'u1',
+    name: 'Max',
+    job: {title: 'CEO', description: 'My own company'}
+}
+
+console.log(fetchedUserData?.job?.title);
+
+
 // type UnknownenEmployee = Employee | Admin;
 
 // function printEmployeeInformation(emp: UnknownenEmployee) {
