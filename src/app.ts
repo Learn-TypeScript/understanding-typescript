@@ -16,7 +16,8 @@
 
 //-----------------------------
 // Creating a generic function:
-function merge<T, U>(objA: T, objB: U) {
+// Working with constrains: T extends object,
+function merge<T extends object, U extends object>(objA: T, objB: U) {
     return Object.assign(objA, objB)
 }
 // With generic TS can infer the name and age properties. 
@@ -24,4 +25,5 @@ function merge<T, U>(objA: T, objB: U) {
 const mergedObj = merge({name: 'Max'}, {age: 30})
 console.log(mergedObj.age);
 
+//---------------------------------
 
