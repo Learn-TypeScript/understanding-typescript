@@ -55,7 +55,7 @@ extractAndConvert({name: 'Max'}, 'name')
 // Better set ...extends string | number | boolean so it won't be able to work with objects. 
 class DataStorage<T extends string | number | boolean> {
     private data: T[] = [];
-
+    
     addItem(item: T) {
         this.data.push(item)
     }
@@ -66,7 +66,7 @@ class DataStorage<T extends string | number | boolean> {
         }
         this.data.splice(this.data.indexOf(item), 1)
     }
-
+    
     getItems() {
         return [...this.data]
     }
@@ -85,18 +85,47 @@ const textStorage3 = new DataStorage<number | string>();
 // Working with objects:
 // Objects work with reference types.
 
-const objStorage = new DataStorage<object>()
-objStorage.addItem({name: 'Max'})
-objStorage.addItem({name: 'Manu'})
-//...
-// Technically {name: 'Max'} is a new object  and has a different address.
-// So indexOf returns -1 because it doesn't find it, thus it starts at the end of the array
-// and splice removes the last item of the array!
-console.log(objStorage.getItems())
-// But if we use the same object then it will work.
-const maxObj = {name: 'Max'}
-objStorage.addItem(maxObj)
-console.log(objStorage.getItems())
-objStorage.removeItem(maxObj)
+// const objStorage = new DataStorage<object>()
+// objStorage.addItem({name: 'Max'})
+// objStorage.addItem({name: 'Manu'})
+// //...
+// // Technically {name: 'Max'} is a new object  and has a different address.
+// // So indexOf returns -1 because it doesn't find it, thus it starts at the end of the array
+// // and splice removes the last item of the array!
+// console.log(objStorage.getItems())
+// // But if we use the same object then it will work.
+// const maxObj = {name: 'Max'}
+// objStorage.addItem(maxObj)
+// console.log(objStorage.getItems())
+// objStorage.removeItem(maxObj)
 
-console.log(objStorage.getItems())
+// console.log(objStorage.getItems()) 
+
+//---------------------------------
+// Generic Utility Types:
+// Partial
+interface CourseGoal {
+    title: string;
+    description: string;
+    completeUntil: Date;
+}
+
+// This is correct, but we'll use something else.
+// function createCourseGoal(title: string, description: string, date: Date): CourseGoal {
+//     return { title: title, description: description, completeUntil: date}
+// }
+
+function createCourseGoal(title: string, description: string, date: Date): CourseGoal {
+    // Partial indicates that courseGoal is an obj that in the end will be a CourseGoal.
+    // But with Partial all the properties that courseGoal should have are obtional.
+    let courseGoal: Partial<CourseGoal> = {};
+    courseGoal.title = title;
+    courseGoal.description = description;
+    courseGoal.completeUntil = date;
+    // Use type casting to set it to CourseGoal because it's still a Partial<CourseGoal>
+    return courseGoal as CourseGoal;
+}
+// ------------
+// Readonly
+const names: Readonly<string[]> = ['Max', 'Anna'];
+// names.push('Manu')// not possible

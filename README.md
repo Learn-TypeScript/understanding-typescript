@@ -144,3 +144,6 @@ or
             - More on Advanced Types: https://www.typescriptlang.org/docs/handbook/advanced-types.html
 7.  - **Generics**
         - Generics is a type which is connected to another type so TS gives us better support.
+        - Generic Utility Types: Give extra type safety and flexibility.
+            - Partial: Turns the properties of an object to optional.
+            - Readonly: Not allowed to add new properties to obj eg. 
