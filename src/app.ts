@@ -26,4 +26,19 @@ const mergedObj = merge({name: 'Max'}, {age: 30})
 console.log(mergedObj.age);
 
 //---------------------------------
+// Another Generic function
+
+interface Lengthy {
+    length: number
+}
+
+function countAndDescribe<T extends Lengthy>(element: T): [T, string] {
+    let descriptionText = 'Got no value';
+    if (element.length > 0) {
+        descriptionText = 'Got ' + element.length + ' element(s)';
+    }
+    return [element, descriptionText] // tuple: An array with fixed length and fixed type
+}
+
+console.log(countAndDescribe('Hi there!'));
 
