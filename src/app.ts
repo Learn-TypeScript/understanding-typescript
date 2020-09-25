@@ -65,26 +65,26 @@ function Log2(target: any, propertyName: string, descriptor: PropertyDescriptor)
     console.log('Log2! propertyName ', propertyName);
     console.log('Log2! descriptor ', descriptor);
     
- }
+}
 
 function Log3(target: any, propertyName: string, descriptor: PropertyDescriptor) {
     console.log('Log3!, target ',  target);
     console.log('Log3! propertyName ', propertyName);
     console.log('Log3! descriptor ', descriptor);
     
- }
+}
 
 function Log4(target: any, propertyName: string, position: number) {
     console.log('Log4!, target ',  target);
     console.log('Log4! propertyName ', propertyName);
     console.log('Log4! position ', position);
     
- }
+}
 class Product {
     @Log
     title: string;
     private _price: number;
-
+    
     @Log2
     set Price(val: number) {
         if (val) {
@@ -93,14 +93,53 @@ class Product {
             throw new Error('Invalid price - should be positive.')
         }
     }
-
+    
     constructor(t: string, p: number){
         this.title = t;
         this._price = p
     }
-
+    
     @Log3
     getPriceWithTax(@Log4 tax: number){
         return this._price * (1  + tax)
     }
 }
+
+// ------------------------------
+// 114. Example: Creating an "Autobind" Decorator.
+console.log('// ------------------------------');
+console.log('114. Example: Creating an "Autobind" Decorator');
+
+// Change the behavior of `this`, so it won't targer the `button` but the `Printer`.
+function Autobind(_:any, _2: string, descriptor: PropertyDescriptor) {
+    const originalMethod = descriptor.value; // check the log of Log3 to see what `value` is.
+    const adjDescriptor: PropertyDescriptor = {
+        configurable: true,
+        enumerable: false,
+        get() {
+            const boundFn = originalMethod.bind(this); // `this` of `get()` is the `Printer`.
+            return boundFn;
+        }
+    }
+    return adjDescriptor;
+}
+
+class Printer {
+    message = 'This works!'
+
+    @Autobind
+    showMessage() {
+        console.log(this.message);
+    }
+}
+
+const p = new Printer();
+
+const button = document.querySelector('button')!; // ! tells TS that the button exists. It's not null.
+// Use bind, other wise `this` will refer to the target of the event, ie `button`.
+// But with `@Autobind` decorator, we don't need `bind`
+// button.addEventListener('click', p.showMessage.bind(p));
+button.addEventListener('click', p.showMessage);
+
+
+
