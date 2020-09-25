@@ -147,3 +147,5 @@ or
         - Generic Utility Types: Give extra type safety and flexibility.
             - Partial: Turns the properties of an object to optional.
             - Readonly: Not allowed to add new properties to obj eg. 
+        - These links might also be interesting:
+            - More on Generics: https://www.typescriptlang.org/docs/handbook/generics.html
