@@ -34,3 +34,39 @@ class Person1 {
 
 const pers = new Person1();
 console.log(pers);
+
+// ------------------------------
+// 109. Diving into Property Decorators
+console.log('// ------------------------------');
+console.log('Diving into Property Decorators');
+
+
+function Log(target: any, propertyName: string | Symbol) {
+    console.log('Property decorator!, target ',  target);
+    console.log('Property decorator! propertyName ', propertyName);
+    
+
+}
+
+class Product {
+    @Log
+    title: string;
+    private _price: number;
+
+    setPrice(val: number) {
+        if (val) {
+            this._price = val;
+        } else {
+            throw new Error('Invalid price - should be positive.')
+        }
+    }
+
+    constructor(t: string, p: number){
+        this.title = t;
+        this._price = p
+    }
+
+    getPriceWithTax(tax: number){
+        return this._price * (1  + tax)
+    }
+}
