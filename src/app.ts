@@ -1,10 +1,14 @@
 console.log('Decorators');
 
-function Logger(constructor: Function) {
-    console.log('Logging... ' + constructor)
+function Logger(logString: string) {
+    return function(constructor: Function) {
+        console.log('Logging... ' + constructor);
+        console.log('logString... ' + logString);
+    }
+    
 }
 
-@Logger
+@Logger('Logging - Person1')
 class Person1 {
     name = 'Max';
 
