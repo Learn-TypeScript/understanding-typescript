@@ -11,19 +11,32 @@ function Logger(logString: string) {
 
 function WithTemplate(template: string, hookId: string) {
     console.log('TEMPLATE FACTORY');
-    return function (constructor: any) { // change type to any so it's not a normal function 
-        console.log('WithTemplate... ' + constructor);
-        const p = new constructor(); // creates an instance of the class that is decorated.
-        const hookEl = document.getElementById(hookId);
-        if (hookEl) {
-            hookEl.innerHTML = template
-            hookEl.querySelector('h2')!.textContent = p.name
+    // {new(...args: any[]): {name: string}} : It's an object that can be created by using `new`. 
+    // So it's a constructor function. 
+    return function<T extends {new(...args: any[]): {name: string}}> (originalConstructor: T) { // change type to any so it's not a normal function 
+    // create and return a class which creates a constructor.    
+    return class extends originalConstructor {
+            // Add new functionality
+            // ..._: we don't use args so TS should ignore it.
+            constructor(..._: any[]) {
+                super()
+                // Now the template will be rendered to the DOM only if we instantiate an instance of the class.
+                console.log('WithTemplate... ' + originalConstructor);
+                // creates an instance of the class that is decorated.
+                // const p = new originalConstructor(); // no need to call it anymore use `this`
+
+                const hookEl = document.getElementById(hookId);
+                if (hookEl) {
+                    hookEl.innerHTML = template
+                    hookEl.querySelector('h1')!.textContent = this.name
+                }
+            }
         }
     }
 }
 
 @Logger('Logging - Person1')
-@WithTemplate('<h2>Adding text to a div using decorators<h2', 'app')
+@WithTemplate('<h1>Adding text to a div using decorators<h1', 'app')
 class Person1 {
     name = 'Max';
 
@@ -32,8 +45,9 @@ class Person1 {
     }
 }
 
-const pers = new Person1();
-console.log(pers);
+// So now if we don't instantiate Person we don't get the insertion of the h1 to the div, id Max.
+// const pers = new Person1(); 
+// console.log(pers);
 
 // ------------------------------
 // 109. Diving into Property Decorators

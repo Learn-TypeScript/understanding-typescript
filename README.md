@@ -168,3 +168,7 @@ or
                         set: ƒ Price(val)
                         __proto__: Object
                 ```
+        - What is the order that decorators run? They all execute when the class they are assigned too, is defined and the methods are registed etc! They don't run when the class is instanciated. They just allow you to do additional work behind the sceens. e.g. setup code that should run when a method is called.
+        - 112. Returning (and changing) a Class in a Class Decorator:
+            - In decorators you can return the constructor of the class and even change it. Now the decorator runs not when the class is defined but when it's instantiated!
+            - setters / getters and methods may also return something. eg a new property descriptor.
