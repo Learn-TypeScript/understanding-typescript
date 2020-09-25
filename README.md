@@ -150,7 +150,7 @@ or
         - These links might also be interesting:
             - More on Generics: https://www.typescriptlang.org/docs/handbook/generics.html
 8.  -**Decorators**
-        - Is an instrument for writing code which is then easier to use by other developers. eg one class gets used correctly, or do some hiden transformation. 
+        - Is an instrument for writing code which is then easier to be used by other developers. eg one class gets used correctly, or do some hiden transformation. 
         - A decorator is a function you apply to a class when the class is defined. Is not needed for the class to be instantiated.
         - Decorator Factories gives us more power to configure what the decorator does internally.
      

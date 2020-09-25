@@ -8,10 +8,13 @@ function Logger(logString: string) {
 }
 
 function WithTemplate(template: string, hookId: string) {
-    return function (_: Function) {
+    return function (constructor: any) { // change type to any so it's not a normal function 
+        console.log('WithTemplate... ' + constructor);
+        const p = new constructor(); // creates an instance of the class that is decorated.
         const hookEl = document.getElementById(hookId);
         if (hookEl) {
             hookEl.innerHTML = template
+            hookEl.querySelector('h2')!.textContent = p.name
         }
     }
 }
