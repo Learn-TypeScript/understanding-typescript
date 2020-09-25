@@ -155,6 +155,16 @@ or
         - Decorator Factories gives us more power to configure what the decorator does internally.
         - When we have multiple Decorator Factories assigned in a class the decorators get executed bottom up.
         - You cannot use a decorator that is finetuned for classes elsewhere.
+        - You can add decorators to: inctance property of a class, to a setter / getter, to a method, or a parameter.
         - When adding a dec to an instance property of a class, the dec gets 2 arguments: 
             - 1. target = the istance property prototype. Note: if it was a static property, it would infer to the constructor function. 
             - 2. property name: a string or sympol...
+        - Accessor  decorators take 3 args: The 3d is the PropetryDedcriptor which is eg for a setter:
+                ```js
+                    {get: undefined, enumerable: false, configurable: true, set: ƒ}
+                        configurable: true
+                        enumerable: false
+                        get: undefined
+                        set: ƒ Price(val)
+                        __proto__: Object
+                ```

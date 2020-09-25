@@ -42,18 +42,37 @@ console.log('Diving into Property Decorators');
 
 
 function Log(target: any, propertyName: string | Symbol) {
-    console.log('Property decorator!, target ',  target);
-    console.log('Property decorator! propertyName ', propertyName);
-    
-
+    console.log('Log!, target ',  target);
+    console.log('Log! propertyName ', propertyName);
 }
 
+function Log2(target: any, propertyName: string, descriptor: PropertyDescriptor) {
+    console.log('Log2!, target ',  target);
+    console.log('Log2! propertyName ', propertyName);
+    console.log('Log2! descriptor ', descriptor);
+    
+ }
+
+function Log3(target: any, propertyName: string, descriptor: PropertyDescriptor) {
+    console.log('Log3!, target ',  target);
+    console.log('Log3! propertyName ', propertyName);
+    console.log('Log3! descriptor ', descriptor);
+    
+ }
+
+function Log4(target: any, propertyName: string, position: number) {
+    console.log('Log4!, target ',  target);
+    console.log('Log4! propertyName ', propertyName);
+    console.log('Log4! position ', position);
+    
+ }
 class Product {
     @Log
     title: string;
     private _price: number;
 
-    setPrice(val: number) {
+    @Log2
+    set Price(val: number) {
         if (val) {
             this._price = val;
         } else {
@@ -66,7 +85,8 @@ class Product {
         this._price = p
     }
 
-    getPriceWithTax(tax: number){
+    @Log3
+    getPriceWithTax(@Log4 tax: number){
         return this._price * (1  + tax)
     }
 }
