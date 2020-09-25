@@ -153,4 +153,5 @@ or
         - Is an instrument for writing code which is then easier to be used by other developers. eg one class gets used correctly, or do some hiden transformation. 
         - A decorator is a function you apply to a class when the class is defined. Is not needed for the class to be instantiated.
         - Decorator Factories gives us more power to configure what the decorator does internally.
+        - When we have multiple Decorator Factories assigned in a class the decorators get executed bottom up.
      

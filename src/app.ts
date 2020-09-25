@@ -1,6 +1,8 @@
 console.log('Decorators');
 
 function Logger(logString: string) {
+    console.log('LOGGER FACTORY');
+    
     return function(constructor: Function) {
         console.log('Logging... ' + constructor);
         console.log('logString... ' + logString);
@@ -8,6 +10,7 @@ function Logger(logString: string) {
 }
 
 function WithTemplate(template: string, hookId: string) {
+    console.log('TEMPLATE FACTORY');
     return function (constructor: any) { // change type to any so it's not a normal function 
         console.log('WithTemplate... ' + constructor);
         const p = new constructor(); // creates an instance of the class that is decorated.
@@ -19,7 +22,7 @@ function WithTemplate(template: string, hookId: string) {
     }
 }
 
-// @Logger('Logging - Person1')
+@Logger('Logging - Person1')
 @WithTemplate('<h2>Adding text to a div using decorators<h2', 'app')
 class Person1 {
     name = 'Max';
