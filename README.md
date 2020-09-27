@@ -172,3 +172,4 @@ or
         - 112. Returning (and changing) a Class in a Class Decorator:
             - In decorators you can return the constructor of the class and even change it. Now the decorator runs not when the class is defined but when it's instantiated!
             - setters / getters and methods may also return something. eg a new property descriptor.
+        - More on Decorators: https://www.typescriptlang.org/docs/handbook/decorators.html
