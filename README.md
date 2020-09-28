@@ -5,12 +5,17 @@ Don't limit the Usage of TypeScript to Angular! Learn the Basics, its Features, 
 Created by Maximilian Schwarzmüller
 
 ### Notes:
-run: 
-`tsc src/app.ts --watch`
-or
-`tsc src/app.ts -w`
-or 
-`tsc -w`
+    To enter watch mode, run: 
+
+    - `tsc src/app.ts --watch`
+
+    or
+
+    - `tsc src/app.ts -w`
+
+    or 
+
+    - `tsc -w`
 
 1. **Getting Started**
     - What is TS:
@@ -134,13 +139,17 @@ or
     - `never` If a function doesn't return anything and also throws an error... then this function doesn't return anything eg `cb: (num: number) => never `
 3. **The TypeScript Compiler (and its Configuration)**
     - run `tsc app.ts -w` to enter watch mode. You can quite with `ctrl + C`. With watch mode you don't have to run `tsc fileName.ts` all the time. It runs automatically when saving the file.
-    - run `tsc --init` to tell TS that all the files here are one project. It will create the  `tsconfig.json` file ...
+    - run `tsc --init` to tell TS that all the files here are one project. It will create the  `tsconfig.json` file ... Then TS will run all the .ts files of your project, by running just `tsc` without the file name. And it can be combined with `watch mode` by runnig: `tsc -w`.
     - You can exclude files from compiling by puting them in the `exclude` in `tsconfig.json` 
       eg:
         ```js
             },
             "exclude": [
-                "analytics.ts"
+                "analytics.ts" // or "*.dev.ts" or "**/*.dev.ts" Note: * is a wildcard. 
+            ]
+            },
+            "include": [
+                "fileName.ts" // Note: We compile include minus exclude... @5:00
             ]
         }
         ```
