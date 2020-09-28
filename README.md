@@ -53,14 +53,34 @@ or
              //...
              role = Role.ADMIN
          }
-       
         ```
-     - `any` Any kind of value, no specific type assignment. Avoid when it's possible. It's just like vanila JS.
+        - Docs: A helpful addition to the standard set of datatypes from JavaScript is the enum. As in languages like C#, an enum is a way of giving more friendly names to sets of numeric values.
+        ```js
+            enum Color {
+            Red,
+            Green,
+            Blue,
+            }
+            let c: Color = Color.Green;
+        ```
+     - [`any`](https://www.typescriptlang.org/docs/handbook/basic-types.html#any) Any kind of value, no specific type assignment. Avoid when it's possible. It's just like vanila JS.
      - `union` eg `number | string`
-     - `literal` eg `'as-number' | 'as-text'` = union type, combined with literal types
+        - Docs: A popular use-case for union types is to describe the set of strings or numbers literal that a value is allowed to be:
+        ```js
+            type WindowStates = "open" | "closed" | "minimized";
+            type LockStates = "locked" | "unlocked";
+            type OddNumbersUnderTen = 1 | 3 | 5 | 7 | 9;
+        ```
+        - Docs: Unions provide a way to handle different types too. For example, you may have a function that takes an array or a string:
+        ```js
+        function getLength(obj: string | string[]) {
+        return obj.length;
+        }
+        ```
+     - `literal` You are very clear about the value. eg `'as-number' | 'as-text'` = union type, combined with literal types
      - `Type Aliases / Custom Types`: eg `type Combinable = number | string;` Create a new type which stores a union type. 
      - `Type Aliases & Object Types`: Type aliases can be used to "create" your own types. You're not limited to storing       union types though - you can also provide an alias to a possibly complex object type.
-
+    - Type assertions [docs](https://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions)
        For example:
 
         ```js
@@ -88,7 +108,7 @@ or
             return checkAge > user.age;
             }
         ```
-    - `Functions` as Types: eg `let combineValues: Function` or `let combineValues: (a: number, b: number) => number`
+    - `Functions` as Types: eg `let combineValues: Function` or you can be more specifiek: `let combineValues: (a: number, b: number) => number`
     - `Function Types & Callbacks`: 
         ```js 
         funtion addAndHandle(n1: number, n2: number, cb: (num: number) => void) {
@@ -100,8 +120,18 @@ or
             console.log(result);
         })
         ```
-    - `unknown` It's a bit more restrictive then `any`. eg you cannot assign an unknown value to a varible of string type. But you can with `any`. 
-    - `never` If a function doesn't return anything and also throws an error... then this function doesn't return anything eg cb: (num: number) => never 
+    - `unknown` It's a bit more restrictive than `any`. eg you cannot assign an unknown value to a varible of string type. But you can with `any`. 
+        ```js
+        let userInput: unknown;
+        let userName: string;
+
+        userInput = 5;
+        userInput = 'Max';
+        userName = userInput; // with `unknown`  we get an error, but not with `any`.
+
+        ```
+        - [unknown @ docs ](https://www.typescriptlang.org/docs/handbook/basic-types.html#unknown)
+    - `never` If a function doesn't return anything and also throws an error... then this function doesn't return anything eg `cb: (num: number) => never `
 3. **The TypeScript Compiler (and its Configuration)**
     - run `tsc app.ts -w` to enter watch mode. You can quite with `ctrl + C`. With watch mode you don't have to run `tsc fileName.ts` all the time. It runs automatically when saving the file.
     - run `tsc --init` to tell TS that all the files here are one project. It will create the  `tsconfig.json` file ...
@@ -139,6 +169,7 @@ or
     - About let, const etc...
 5.  - **Classes & Interfaces** ...
         - An interface describes the structure of an object. Use it to type-check an object. But why not use just `custom types` then?
+        - Note: From the docs: You’ll see that there are two syntaxes for building types: Interfaces and Types. You should prefer interface. Use type when you need specific features.
          - Differences between `interfaces` and `custom types`:
             1. Interfaces only describe the structure of an object. In custom types you can use also store other things like `union types` etc. So when using an interface it's clear you want to describe the structure of an object.
             2. You can implement an interface inside a class. It can be used as a contract a class can implement and then has to adhere to. Then you can share an interface among different classes. Note: A class may implement multiple interfaces. 
