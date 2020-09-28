@@ -8,7 +8,7 @@ function Logger(logString: string) {
     console.log('logString... ' + logString);
   };
 }
-
+// WithTemplate is a decorator factory!
 function WithTemplate(template: string, hookId: string) {
   console.log('TEMPLATE FACTORY');
   // {new(...args: any[]): {name: string}} : It's an object that can be created by using `new`.
@@ -16,12 +16,16 @@ function WithTemplate(template: string, hookId: string) {
   return function<T extends { new (...args: any[]): { name: string } }>(originalConstructor: T) {
     // change type to any so it's not a normal function
     // create and return a class which creates a constructor.
+    // In a class decorator we can return a constructor which depends on the old one
+    // so we can keep all the properties of the class, and will replace the old one.
     return class extends originalConstructor {
       // Add new functionality
       // ..._: we don't use args so TS should ignore it.
       constructor(..._: any[]) {
+        // with super() we save the original constructor
         super();
         // Now the template will be rendered to the DOM only if we instantiate an instance of the class.
+        // Not when it's just defined, like previously.
         console.log('WithTemplate... ' + originalConstructor);
         // creates an instance of the class that is decorated.
         // const p = new originalConstructor(); // no need to call it anymore use `this`
@@ -109,7 +113,12 @@ console.log('114. Example: Creating an "Autobind" Decorator');
 
 // Change the behavior of `this`, so it won't targer the `button` but the `Printer`.
 function Autobind(_: any, _2: string, descriptor: PropertyDescriptor) {
-  const originalMethod = descriptor.value; // check the log of Log3 to see what `value` is.
+  // check the log of Log3 to see what `value` is.
+  /* enumerable: false
+  value: ƒ getPriceWithTax(tax)
+  writable: true
+  __proto__: Object */
+  const originalMethod = descriptor.value; // get the name of the function
   const adjDescriptor: PropertyDescriptor = {
     configurable: true,
     enumerable: false,
@@ -164,12 +173,14 @@ arguments: (...)
 caller: (...)
 length: 2
 name: "Product" */
+// A property decorator object, takes in 2 properties.
 function Required(target: any, propName: string) {
   registeredValidators[target.constructor.name] = {
     // We first retrive any existing validators, then copy them into the array,
     // because if we had other validators for this prop they would be overrided.
-    // price or title
-    ...registeredValidators[target.constructor.name],
+    // If we have other validators add them, else add nothing ([]) and then add the 'required' validator.
+    // [...(registeredValidators[target.constructor.name] ? [propName] : []), 'required']
+    ...registeredValidators[target.constructor.name], // price or title
     [propName]: [...(registeredValidators[target.constructor.name] ? [propName] : []), 'required']
   };
 }
@@ -184,6 +195,7 @@ function PositiveNumber(target: any, propName: string) {
 // Runs through all registered validators and runs different logic, based on the validators.
 function validate(obj: any) {
   const objValidatorConfig = registeredValidators[obj.constructor.name];
+  // If we try to find and obj for which nothing was registered.
   if (!objValidatorConfig) {
     return true; // There is nothing to validate, so it's valid!
   }
@@ -192,7 +204,6 @@ function validate(obj: any) {
   for (const prop in objValidatorConfig) {
     console.log('objValidatorConfig[prop] ', objValidatorConfig[prop][0]);
     for (const validator of objValidatorConfig[prop]) {
-      // const validator = objValidatorConfig[prop][0];
       switch (validator) {
         case 'required':
           isValid = isValid && !!obj[prop];

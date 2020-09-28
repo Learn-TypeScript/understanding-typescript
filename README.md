@@ -33,9 +33,29 @@ or
      - `objects` Any Js object but also more specific types of objects are possible.
      - `Array` Any JS array - type can be flexible or strict regarding the element types.
    - extra types:
-     - `Tuple` An array but with fixed length and fixed type. eg `[number, string]`
-     - `Enums: {NEW, OLD}` Added by TypeScript: Automatically enumerated global constant identifiers. Specifiek identifiers    global constants, which may be represented as numbers, but we assign a human readable lable.
-     - `any` Any kind of value, no specific type assignment.
+     - `Tuple` An array but with fixed length and fixed type. eg `[number, string]` . Note: You can assing new values to a tuple, and if you mix the order, you'll get an error. But if you use `push` you don't get an error!!! 
+        ```js
+        const role: [number, string] = [2, author];
+        role[1] = 10; // error
+        role.push('admin'); // No error
+        ```
+     - `Enums: {NEW, OLD}` Added by TypeScript: Automatically enumerated global constant identifiers. Specifiek identifiers,    global constants, which may be represented as numbers, but we assign a human readable lable.
+         ```js
+         // Every input gets a number value. ADMIN = 0 ...
+         enum Role {ADMIN, READ_ONLY, AUTHOR};
+         // You may also assing your own number, then the rest will follow, like 5, 6, 7
+         enum Role {ADMIN = 5, READ_ONLY, AUTHOR};
+         // Or you may assing numbers to all the identifiers
+         enum Role {ADMIN = 5, READ_ONLY = 100, AUTHOR = 200};
+         // And you can also use text.
+         enum Role {ADMIN = 'ADMIN', READ_ONLY = 100, AUTHOR = 200};
+         const Person = {
+             //...
+             role = Role.ADMIN
+         }
+       
+        ```
+     - `any` Any kind of value, no specific type assignment. Avoid when it's possible. It's just like vanila JS.
      - `union` eg `number | string`
      - `literal` eg `'as-number' | 'as-text'` = union type, combined with literal types
      - `Type Aliases / Custom Types`: eg `type Combinable = number | string;` Create a new type which stores a union type. 
@@ -154,7 +174,7 @@ or
         - A decorator is a function you apply to a eg class when the class is defined. Is not needed for the class to be instantiated.
         - Decorator Factories gives us more power to configure what the decorator does internally.
         - When we have multiple Decorator Factories assigned in a class the decorators get executed bottom up.
-        - You cannot use a decorator that is finetuned for classes elsewhere.
+        - You cannot use a decorator that is finetuned for classes, elsewhere.
         - You can add decorators to: inctance property of a class, to a setter / getter, to a method, or a parameter.
         - When adding a dec to an instance property of a class, the dec gets 2 arguments: 
             - 1. target = the istance property prototype. Note: if it was a static property, it would infer to the constructor function. 
@@ -171,5 +191,5 @@ or
         - What is the order that decorators run? They all execute when the class they are assigned too, is defined and the methods are registed etc! They don't run when the class is instanciated. They just allow you to do additional work behind the sceens. e.g. setup code that should run when a method is called.
         - 112. Returning (and changing) a Class in a Class Decorator:
             - In decorators you can return the constructor of the class and even change it. Now the decorator runs not when the class is defined but when it's instantiated!
-            - setters / getters and methods may also return something. eg a new property descriptor.
+            - setters / getters and methods may also return something. eg a new property descriptor and change how the property is configured.
         - More on Decorators: https://www.typescriptlang.org/docs/handbook/decorators.html
