@@ -224,17 +224,39 @@ Created by Maximilian Schwarzmüller
             - Readonly: Not allowed to add new properties to obj eg. 
         - These links might also be interesting:
             - More on Generics: https://www.typescriptlang.org/docs/handbook/generics.html
-8.  -**Decorators**
-        - Is an instrument for writing code which is then easier to be used by other developers. eg one class gets used correctly, or do some hiden transformation. 
-        - A decorator is a function you apply to a eg class when the class is defined. Is not needed for the class to be instantiated.
-        - Decorator Factories gives us more power to configure what the decorator does internally.
-        - When we have multiple Decorator Factories assigned in a class the decorators get executed bottom up.
-        - You cannot use a decorator that is finetuned for classes, elsewhere.
+8.  -**[Decorators](https://www.typescriptlang.org/docs/handbook/decorators.html#decorators)** 
+        A Decorator is a special kind of declaration that can be attached to a 
+            - `class declaration`, 
+            - `method`, 
+            - `accessor`, 
+            - `property`, or         
+            - `parameter`. 
+        - It's an instrument for writing code which is then easier to be used by other developers. eg one class gets used correctly, or do some hiden transformation. 
+        - A decorator is a function you apply to eg a class when the class is **defined**. It's not needed for the class to be instantiated.
+        - `Decorator Factories` gives us more power to configure what the decorator does internally. When we have multiple Decorator Factories assigned in a class the decorators get executed bottom up.
+        - You cannot use a decorator that is fine tuned for classes, elsewhere.
         - You can add decorators to: inctance property of a class, to a setter / getter, to a method, or a parameter.
-        - When adding a dec to an instance property of a class, the dec gets 2 arguments: 
-            - 1. target = the istance property prototype. Note: if it was a static property, it would infer to the constructor function. 
-            - 2. property name: a string or sympol...
-        - Accessor  decorators take 3 args: The 3d is the PropetryDedcriptor which is eg for a setter:
+        - [Decorator Evaluation](https://www.typescriptlang.org/docs/handbook/decorators.html#decorator-evaluation) 
+        There is a well defined order to how decorators applied to various declarations inside of a class are applied:
+            - Parameter Decorators, followed by Method, Accessor, or Property Decorators are applied for each **instance** member.
+            - Parameter Decorators, followed by Method, Accessor, or Property Decorators are applied for each *static* member.
+            - Parameter Decorators are applied for the constructor.
+            - Class Decorators are applied for the class.
+        - `Class Decorators` - Docs: A Class Decorator is declared just before a class declaration. The class decorator is applied to the `constructor` of the class and can be used to `observe`, `modify`, or `replace` a class definition. A class decorator **cannot** be used in a declaration file, or in any other ambient context (such as on a declare class).
+        - When adding a dec to an `instance` property of a class, the dec gets 2 arguments: 
+            - 1. `target` = the istance property prototype. Note: if it was a static property, it would infer to the constructor function. 
+            - 2. `property name`: a string or sympol...
+        - `Property decorators` take 2 args: The first is `target` and it logs this:
+            ```js
+                {constructor: ƒ, getPriceWithTax: ƒ}
+                constructor: class Product
+                getPriceWithTax: ƒ getPriceWithTax(tax)
+                set Price: ƒ Price(val)
+                __proto__: Object
+            ```
+            - The second arg is the property name.
+            - A property decorator can only be used to observe that a property of a specific name has been declared for a class - there is no descriptor.
+        - `Accessor  decorators` take 3 args: The first two are the same as Propetry dec. The 3d is the `PropetryDescriptor` which is eg for a setter:
                 ```js
                     {get: undefined, enumerable: false, configurable: true, set: ƒ}
                         configurable: true
@@ -243,8 +265,11 @@ Created by Maximilian Schwarzmüller
                         set: ƒ Price(val)
                         __proto__: Object
                 ```
-        - What is the order that decorators run? They all execute when the class they are assigned too, is defined and the methods are registed etc! They don't run when the class is instanciated. They just allow you to do additional work behind the sceens. e.g. setup code that should run when a method is called.
+            - NOTE: TypeScript disallows decorating both the get and set accessor for a single member (docs).
+        - [Method decorators](https://www.typescriptlang.org/docs/handbook/decorators.html#method-decorators) take also 3 arguments and are the same as `Accessor decs`.
+        - `Parameter Decorators`: They take 3 args ...and the 3d is the ordinal index of the parameter in the function’s parameter list (docs).
+        - What is the order that decorators run? They all execute when the class they are assigned to is defined and the methods are registed etc! They don't run when the class is instanciated. They just allow you to do additional work behind the sceens. e.g. setup code that should run when a method is called.
         - 112. Returning (and changing) a Class in a Class Decorator:
-            - In decorators you can return the constructor of the class and even change it. Now the decorator runs not when the class is defined but when it's instantiated!
+            - In decorators you can return the constructor of the class and even override it. Check `WithTemplate` in `app.ts`. Now the decorator runs not when the class is defined but when it's instantiated!
             - setters / getters and methods may also return something. eg a new property descriptor and change how the property is configured.
         - More on Decorators: https://www.typescriptlang.org/docs/handbook/decorators.html
