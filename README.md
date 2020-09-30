@@ -85,7 +85,7 @@ Created by Maximilian Schwarzmüller
      - `literal` You are very clear about the value. eg `'as-number' | 'as-text'` = union type, combined with literal types
      - `Type Aliases / Custom Types`: eg `type Combinable = number | string;` Create a new type which stores a union type. 
      - `Type Aliases & Object Types`: Type aliases can be used to "create" your own types. You're not limited to storing       union types though - you can also provide an alias to a possibly complex object type.
-    - Type assertions [docs](https://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions)
+    
        For example:
 
         ```js
@@ -112,6 +112,11 @@ Created by Maximilian Schwarzmüller
             function isOlder(user: User, checkAge: number) {
             return checkAge > user.age;
             }
+        ```
+    - Type assertions [docs](https://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions)
+        ```js
+        let someValue: unknown = "this is a string";
+        let strLength: number = (someValue as string).length;
         ```
     - `Functions` as Types: eg `let combineValues: Function` or you can be more specifiek: `let combineValues: (a: number, b: number) => number`
     - `Function Types & Callbacks`: 
@@ -177,10 +182,19 @@ Created by Maximilian Schwarzmüller
 4. **Next-generation JavaScript & TypeScript** 
     - About let, const etc...
 5.  - **Classes & Interfaces** ...
+        - [Classes](https://www.typescriptlang.org/docs/handbook/classes.html)
+        - [Interfaces](https://www.typescriptlang.org/docs/handbook/interfaces.html) One of TypeScript’s core principles is that type checking focuses on the shape that values have. This is sometimes called **“duck typing” or “structural subtyping”**. 
+        - [Readonly](https://www.typescriptlang.org/docs/handbook/interfaces.html#readonly-properties) TypeScript comes with a `ReadonlyArray<T> `type that is the same as `Array<T> `with all mutating methods removed, so you can make sure you don’t change your arrays after creation:
+        ```js
+            let a: number[] = [1, 2, 3, 4];
+            let ro: ReadonlyArray<number> = a;
+
+            ro[0] = 12; // error!
+        ```
         - An interface describes the structure of an object. Use it to type-check an object. But why not use just `custom types` then?
         - Note: From the docs: You’ll see that there are two syntaxes for building types: Interfaces and Types. You should prefer interface. Use type when you need specific features.
          - Differences between `interfaces` and `custom types`:
-            1. Interfaces only describe the structure of an object. In custom types you can use also store other things like `union types` etc. So when using an interface it's clear you want to describe the structure of an object.
+            1. Interfaces only describe the structure of an object. In custom types you can store also other things like `union types` etc. So when using an interface it's clear you want to describe the structure of an object.
             2. You can implement an interface inside a class. It can be used as a contract a class can implement and then has to adhere to. Then you can share an interface among different classes. Note: A class may implement multiple interfaces. 
             3. We can implement `Inheritance` in interfaces by extending in an interface another one, or even multiple.
             4. With Interfaces you can describe the structure of a function too. But probably it's a bit more common to use custom types.
@@ -188,18 +202,18 @@ Created by Maximilian Schwarzmüller
     - These links might also be interesting:
         - More on (JS) Classes: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
         - More on TS Interfaces: https://www.typescriptlang.org/docs/handbook/interfaces.html
-6.  - **Advanced Types**
+6.  - [**Advanced Types**](https://www.typescriptlang.org/docs/handbook/advanced-types.html)
         - Intersection types: Allow as to combine other types. They are close related to interface inheritance. But with interfaces we use more code. Note: You can use intersection types not only with objects but with any types. eg with union types you get the types that 2 union types have in common. 
         - Type guards: 
             1. `typeof`
             2. `in`
             3. `instanceof`
-        - Discriminated Unions: It's a pattern to use with union types and make working with type guards easier.
+        - [Discriminated Unions](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-func.html#discriminated-unions): It's a pattern to use with union types and make working with type guards easier.
         - Type Casting: You can say TS that some value is of specifiek type!
         - Index Properties: Allows to create objects that are more flexible regarding the properties they might hold.
-        - Function Overloads: Allows us to define multiple function signatures, for one function. ie multiple ways of calling a function with different parameters. Use it when TS cannot infer correctly the return type.
-        - Optional Chaining: Let's say you get data from a back end, and you don't know if in an object a certain property is defined. Use optional chaining to not get a runtime error.
-        - Nullish Coalescing: Manage nullish or undefined data.
+        - [Function Overloads](https://www.typescriptlang.org/docs/handbook/2/functions.html#function-overloads), [Ordering](https://www.typescriptlang.org/docs/handbook/declaration-files/do-s-and-don-ts.html#ordering): Allows us to define multiple function signatures, for one function. ie multiple ways of calling a function with different parameters. Use it when TS cannot infer correctly the return type.
+        - [Optional Chaining](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#optional-chaining): Let's say you get data from a back end, and you don't know if in an object a certain property is defined. Use optional chaining to not get a runtime error.
+        - [Nullish Coalescing](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#nullish-coalescing): Manage nullish or undefined data.
         - These links might also be interesting:
             - More on Advanced Types: https://www.typescriptlang.org/docs/handbook/advanced-types.html
 7.  - **Generics**
