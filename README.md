@@ -216,9 +216,10 @@ Created by Maximilian Schwarzmüller
         - [Nullish Coalescing](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#nullish-coalescing): Manage nullish or undefined data.
         - These links might also be interesting:
             - More on Advanced Types: https://www.typescriptlang.org/docs/handbook/advanced-types.html
-7.  - **Generics**
-        - Generics is a type which is connected to another type so TS gives us better support.
-        - Generic Utility Types: Give extra type safety and flexibility.
+7.  - **[Generics](https://www.typescriptlang.org/docs/handbook/generics.html#hello-world-of-generics)**
+        - Generics is a type which is connected to another type so TS gives us better support. They give us flexibility with type safety.
+        - [Generic classes](https://www.typescriptlang.org/docs/handbook/generics.html#generic-classes): As we covered in our section on classes, a class has two sides to its type: the **static** side and the **instance** side. Generic **classes are only generic over their instance side** rather than their static side, so when working with classes, static members can not use the class’s type parameter.
+        - [Utility Types](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype): Give extra type safety and flexibility. Check the docs for `Partial, Readconly` etc.
             - Partial: Turns the properties of an object to optional.
             - Readonly: Not allowed to add new properties to obj eg. 
         - These links might also be interesting:
