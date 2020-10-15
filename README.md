@@ -44,7 +44,7 @@ Created by Maximilian Schwarzmüller
         role[1] = 10; // error
         role.push('admin'); // No error
         ```
-     - `Enums: {NEW, OLD}` Added by TypeScript: Automatically enumerated global constant identifiers. Specifiek identifiers,    global constants, which may be represented as numbers, but we assign a human readable lable.
+     - `Enums: {NEW, OLD}` Added by TypeScript: Automatically enumerated global constant identifiers. Specifiek identifiers, global constants, which may be represented as numbers, but we assign a human readable lable.
          ```js
          // Every input gets a number value. ADMIN = 0 ...
          enum Role {ADMIN, READ_ONLY, AUTHOR};
@@ -58,8 +58,11 @@ Created by Maximilian Schwarzmüller
              //...
              role = Role.ADMIN
          }
+         ...
+
+         if (person.role === Role.AUTHOR)...
         ```
-        - Docs: A helpful addition to the standard set of datatypes from JavaScript is the enum. As in languages like C#, an enum is a way of giving more friendly names to sets of numeric values.
+        - **Docs**: A helpful addition to the standard set of datatypes from JavaScript is the **enum**. As in languages like C#, an enum is a way of giving more friendly names to sets of numeric values.
         ```js
             enum Color {
             Red,
@@ -82,9 +85,9 @@ Created by Maximilian Schwarzmüller
         return obj.length;
         }
         ```
-     - `literal` You are very clear about the value. eg `'as-number' | 'as-text'` = union type, combined with literal types
-     - `Type Aliases / Custom Types`: eg `type Combinable = number | string;` Create a new type which stores a union type. 
-     - `Type Aliases & Object Types`: Type aliases can be used to "create" your own types. You're not limited to storing       union types though - you can also provide an alias to a possibly complex object type.
+     - `literal` You are very clear about the value. eg `'as-number' | 'as-text'` = union type, combined with literal types. [docs](https://www.typescriptlang.org/docs/handbook/literal-types.html) In practice string literal types combine nicely with `union types, type guards, and type aliases`. You can use these features together to get enum-like behavior with strings. ... String literal types can be used in the same way to distinguish overloads. ... Check also: [Numeric Literal Types](https://www.typescriptlang.org/docs/handbook/literal-types.html#numeric-literal-types) and [Boolean Literal Types](https://www.typescriptlang.org/docs/handbook/literal-types.html#numeric-literal-types)
+     - `Type Aliases / Custom Types`: eg `type Combinable = number | string;` Create a new type which stores a union type. [docs](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases) Type aliases create a new name for a type. Type aliases are sometimes similar to interfaces... and just like interfaces, type aliases can also be generic...
+     - `Type Aliases & Object Types`: Type aliases can be used to "create" your own types. You're not limited to storing union types though - you can also provide an alias to a possibly complex object type.
     
        For example:
 
@@ -118,7 +121,7 @@ Created by Maximilian Schwarzmüller
         let someValue: unknown = "this is a string";
         let strLength: number = (someValue as string).length;
         ```
-    - `Functions` as Types: eg `let combineValues: Function` or you can be more specifiek: `let combineValues: (a: number, b: number) => number`
+    - `Functions` as Types: eg `let combineValues: Function` or you can be more specifiek with `Function Types`: `let combineValues: (a: number, b: number) => number`. In this way you avoid assinging to `combineValues` e.g. a number.
     - `Function Types & Callbacks`: 
         ```js 
         funtion addAndHandle(n1: number, n2: number, cb: (num: number) => void) {
@@ -130,20 +133,26 @@ Created by Maximilian Schwarzmüller
             console.log(result);
         })
         ```
-    - `unknown` It's a bit more restrictive than `any`. eg you cannot assign an unknown value to a varible of string type. But you can with `any`. 
+    - `unknown` It's a bit more restrictive than `any`. eg you cannot assign an unknown value to a varible of string type. But you can with `any`. Use it when you don't really know what type of value you will have, but you do know what you want to do with it. [docs](https://www.typescriptlang.org/docs/handbook/basic-types.html#unknown) If you have a variable with an unknown type, you can **narrow** it to something more specific by doing `typeof` checks, `comparison` checks, or more advanced `type guards` checks... 
         ```js
         let userInput: unknown;
         let userName: string;
 
         userInput = 5;
         userInput = 'Max';
-        userName = userInput; // with `unknown`  we get an error, but not with `any`.
+        // with `unknown`  we get an error, but not with `any`.
+        // type uknown is not assignable to type string.
+        userName = userInput; 
+        //but you don't get an error if you first check
+        if (typeof userInput === 'string') {
+            userName = userInput
+        }
 
         ```
-        - [unknown @ docs ](https://www.typescriptlang.org/docs/handbook/basic-types.html#unknown)
     - `never` If a function doesn't return anything and also throws an error... then this function doesn't return anything eg `cb: (num: number) => never `
 3. **The TypeScript Compiler (and its Configuration)**
-    - run `tsc app.ts -w` to enter watch mode. You can quite with `ctrl + C`. With watch mode you don't have to run `tsc fileName.ts` all the time. It runs automatically when saving the file.
+    - Check from the docs [Intro to the TSConfig Reference](https://www.typescriptlang.org/tsconfig)
+    - [Configuring Watch](https://www.typescriptlang.org/docs/handbook/configuring-watch.html#configuring-file-watching-using-a-tsconfigjson) run `tsc app.ts -w` to enter watch mode. You can quit with `ctrl + C`. With watch mode you don't have to run `tsc fileName.ts` all the time. It runs automatically when saving the file.
     - run `tsc --init` to tell TS that all the files here are one project. It will create the  `tsconfig.json` file ... Then TS will run all the .ts files of your project, by running just `tsc` without the file name. And it can be combined with `watch mode` by runnig: `tsc -w`.
     - You can exclude files from compiling by puting them in the `exclude` in `tsconfig.json` 
       eg:
@@ -155,10 +164,13 @@ Created by Maximilian Schwarzmüller
             },
             "include": [
                 "fileName.ts" // Note: We compile include minus exclude... @5:00
+            ],
+            "files": [
+                "app.ts" // Like include, but you cannot specify folders.
             ]
         }
         ```
-      You can also use a wildcard like: `*.dev.ts`. Or like: `**/*dev.ts`. Note: by default "node_modules" is excluded.
+    - You can also use a wildcard like: `*.dev.ts` (= any file). Or like: `**/*dev.ts` (= any file in any folder). Note: by default "node_modules" is excluded.
     - You can also `include` files. But then if you ommit one, it will not be compiled.
     - In `tsconfig.json` `"lib": []` lets you specify which default objects and features TS knows. eg with the DOM. Like how does TS know what a  `button` is...? So, if it's not set in `config` it takes the defaults according to the `target`.
     This is the default:
@@ -173,8 +185,12 @@ Created by Maximilian Schwarzmüller
     - `allowJs` set js files you want to be compiled
     - `"sourceMap": true`, generates extra files that the browsers can read and in this way you get also the .ts files in chrome dev tools, which helps a lot with debuging.
     - `"outDir": "./"` : You can move all the .js files to a `dist` folder and specify the path here, so TS will know where to look. Don't forget to change the path also in index.js
-    - `"rootDir": "./"` Set the folder where the .ts files are.
+    - `"outDir: "./dist"` Set where the created files should be stored.
+    - `"rootDir": "./src"` Set the folder where the .ts files are.
     - `"noEmitOnError": true`: Does not compile the files if there is an error.
+    - About [Strict Type-Checking Options](https://www.typescriptlang.org/tsconfig#Strict_Type_Checking_Options_6173). If you set `"strict": true`, then all the options are set to true. 
+    - About `Additional Checks`, check the docs @ [tsc CLI Options](https://www.typescriptlang.org/docs/handbook/compiler-options.html#compiler-options). These checks are for code quality.
+    - About Debuging with VS Code, check the Q&A [Debugger not working?](https://www.udemy.com/course/understanding-typescript/learn/lecture/16888214#questions/10211160), and this [How to make VS Code work with ESLint, TypeScript and Prettier](https://www.udemy.com/course/understanding-typescript/learn/lecture/16888214#questions/12641080)
     - These links might also be interesting:
         - tsconfig Docs: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html
         - Compiler Config Docs: https://www.typescriptlang.org/docs/handbook/compiler-options.html
