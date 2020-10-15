@@ -199,19 +199,24 @@ Created by Maximilian Schwarzmüller
     - About let, const etc...
 5.  - **Classes & Interfaces** ...
         - [Classes](https://www.typescriptlang.org/docs/handbook/classes.html)
-        - [Interfaces](https://www.typescriptlang.org/docs/handbook/interfaces.html) One of TypeScript’s core principles is that type checking focuses on the shape that values have. This is sometimes called **“duck typing” or “structural subtyping”**. 
+        - [Interfaces](https://www.typescriptlang.org/docs/handbook/interfaces.html) One of TypeScript’s core principles is that type checking focuses on the shape that values have. This is sometimes called **“duck typing” or “structural subtyping”**. In TypeScript, interfaces fill the role of naming these types, and are a powerful way of defining contracts within your code as well as contracts with code outside of your project.
         - [Readonly](https://www.typescriptlang.org/docs/handbook/interfaces.html#readonly-properties) TypeScript comes with a `ReadonlyArray<T> `type that is the same as `Array<T> `with all mutating methods removed, so you can make sure you don’t change your arrays after creation:
         ```js
+             interface Point {
+               readonly x: number;
+               readonly y: number;
+             }
+            ...
             let a: number[] = [1, 2, 3, 4];
             let ro: ReadonlyArray<number> = a;
 
             ro[0] = 12; // error!
         ```
         - An interface describes the structure of an object. Use it to type-check an object. But why not use just `custom types` then?
-        - Note: From the docs: You’ll see that there are two syntaxes for building types: Interfaces and Types. You should prefer interface. Use type when you need specific features.
+        - Note from the docs: You’ll see that there are two syntaxes for building types: `Interfaces` and `Types`. **You should prefer interface**. Use type when you need specific features.
          - Differences between `interfaces` and `custom types`:
             1. Interfaces only describe the structure of an object. In custom types you can store also other things like `union types` etc. So when using an interface it's clear you want to describe the structure of an object.
-            2. You can implement an interface inside a class. It can be used as a contract a class can implement and then has to adhere to. Then you can share an interface among different classes. Note: A class may implement multiple interfaces. 
+            2. You can implement an interface inside a class. It can be used as a contract a class can implement and then has to adhere to. Then you can share an interface among different classes. A class may implement multiple interfaces. 
             3. We can implement `Inheritance` in interfaces by extending in an interface another one, or even multiple.
             4. With Interfaces you can describe the structure of a function too. But probably it's a bit more common to use custom types.
             5. Interfaces: mark properties as optional by adding a `?` after the property. Note: You can also mark methods as optional: `myMethod?(){}`. And also parameters of methods...
@@ -219,21 +224,25 @@ Created by Maximilian Schwarzmüller
         - More on (JS) Classes: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
         - More on TS Interfaces: https://www.typescriptlang.org/docs/handbook/interfaces.html
 6.  - [**Advanced Types**](https://www.typescriptlang.org/docs/handbook/advanced-types.html)
-        - Intersection types: Allow as to combine other types. They are close related to interface inheritance. But with interfaces we use more code. Note: You can use intersection types not only with objects but with any types. eg with union types you get the types that 2 union types have in common. 
-        - Type guards: 
+        - Intersection types: Allow as to combine other types. They are close related to interface inheritance. But with interfaces we use more code. Note: You can use intersection types not only with objects but with any types. eg with union types you get the types that 2 union types have in common. Check: [Intersection Types](https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#intersection-types)
+        - [Type Guards and Differentiating Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-guards-and-differentiating-types): 
             1. `typeof`
             2. `in`
             3. `instanceof`
         - [Discriminated Unions](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-func.html#discriminated-unions): It's a pattern to use with union types and make working with type guards easier.
         - Type Casting: You can say TS that some value is of specifiek type!
-        - Index Properties: Allows to create objects that are more flexible regarding the properties they might hold.
-        - [Function Overloads](https://www.typescriptlang.org/docs/handbook/2/functions.html#function-overloads), [Ordering](https://www.typescriptlang.org/docs/handbook/declaration-files/do-s-and-don-ts.html#ordering): Allows us to define multiple function signatures, for one function. ie multiple ways of calling a function with different parameters. Use it when TS cannot infer correctly the return type.
+        - Index Properties: Allows to create objects that are more flexible regarding the properties they might hold. Check also [Index types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types)
+        - [Function Overloads](https://www.typescriptlang.org/docs/handbook/2/functions.html#function-overloads): Allows us to define multiple function signatures, for one function. ie multiple ways of calling a function with different parameters. Use it when TS cannot infer correctly the return type.
+            - [Ordering](https://www.typescriptlang.org/docs/handbook/declaration-files/do-s-and-don-ts.html#ordering):
+                - Don’t put more general overloads before more specific overloads.
+                - Do sort overloads by putting the more general signatures after more specific signatures.
+                - Why: TypeScript chooses the first matching overload when resolving function calls. When an earlier overload is “more general” than a later one, the later one is effectively hidden and cannot be called.
         - [Optional Chaining](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#optional-chaining): Let's say you get data from a back end, and you don't know if in an object a certain property is defined. Use optional chaining to not get a runtime error.
         - [Nullish Coalescing](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#nullish-coalescing): Manage nullish or undefined data.
         - These links might also be interesting:
             - More on Advanced Types: https://www.typescriptlang.org/docs/handbook/advanced-types.html
-7.  - **[Generics](https://www.typescriptlang.org/docs/handbook/generics.html#hello-world-of-generics)**
-        - Generics is a type which is connected to another type so TS gives us better support. They give us flexibility with type safety.
+7.  - [**Generics**](https://www.typescriptlang.org/docs/handbook/generics.html#hello-world-of-generics)
+        - Generics is a type which is connected to another type, so TS gives us better support. They give us flexibility with type safety.
         - [Generic classes](https://www.typescriptlang.org/docs/handbook/generics.html#generic-classes): As we covered in our section on classes, a class has two sides to its type: the **static** side and the **instance** side. Generic **classes are only generic over their instance side** rather than their static side, so when working with classes, static members can not use the class’s type parameter.
         - [Utility Types](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype): Give extra type safety and flexibility. Check the docs for `Partial, Readconly` etc.
             - Partial: Turns the properties of an object to optional.

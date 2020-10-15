@@ -35,6 +35,7 @@ type Universal = Combinable & Numeric;
 // If we call this func and both args are number, then it returns a number.
 function add1(a: number, b: number): number; // Function overload
 function add1(a: string, b: string): string;
+function add1(a: string, b: number): string;
 function add1(a: number | string, b: number | string): string; // also a string...
 function add1(a: Combinable, b: Combinable) {
   // type guard using typeof
@@ -47,7 +48,7 @@ function add1(a: Combinable, b: Combinable) {
 const result = add1(1, 5);
 // const result2 = add1('Max', ' Schwarz') as string; // with no function overload
 const result3 = add1('Max', ' Schwarz');
-result3.split(' ');
+result3.split(' '); // with function overload TS can infer that the return type is a string
 
 // -------------------------
 // Optional chaning
@@ -55,7 +56,7 @@ result3.split(' ');
 const fetchedUserData = {
   id: 'u1',
   name: 'Max',
-  job: { title: 'CEO', description: 'My own company' }
+  job: { title: 'CEO', description: 'My own company' } // imagine you get this from a back end
 };
 
 console.log(fetchedUserData?.job?.title); // Optional chaning
@@ -67,7 +68,7 @@ console.log(fetchedUserData?.job?.title); // Optional chaning
 // Note:  an empty string would be fasly so in case of ` '' || DEFAULT `  DEFAULT will be printed out.
 const userInput = '';
 
-// const storedData = userInput || 'DEFAULT';
+// const storedData = userInput || 'DEFAULT'; // with || the empty string is falsy so we get DEFAULT
 // nullish coalescing detects only  null or undefined.
 const storedData = userInput ?? 'DEFAULT';
 
@@ -128,8 +129,8 @@ useVehicle(v2);
 // ------------------------
 // Discriminated Unions
 interface Bird {
-  // this is a literal type
-  type: 'bird'; // or kind: 'bird'
+  // this is a literal type i.e. it's a string and must be 'bird'
+  type: 'bird'; // use type or kind: 'bird'
   flyingSpeed: number;
 }
 interface Horse {
@@ -163,7 +164,9 @@ moveAnimal({ type: 'bird', flyingSpeed: 10 });
 // ---------------------
 // Type casting
 
+// One way:
 // const userInputElement = <HTMLInputElement>document.getElementById('user-input')!;
+// Most common way:
 const userInputElement = document.getElementById('user-input') as HTMLInputElement;
 
 // if (userInputElement) {
@@ -175,12 +178,13 @@ userInputElement.value = 'Hi there';
 // -----------------------------------
 // Index Properties:
 
-// Validate input fields and show some proper message if error occur.
-// Let interface be generic so you can check differnt type of fields (not only email and userName)
-// The values should be string, but we don't want to specify the number of the properties neither their names.
-// Use index types
+// Validate input fields and show some proper message if error occurs.
+// Let interface be generic so you can check differnt type of fields (not only email and userName).
+// The values should be string, but we don't want to specify the number of the properties,
+// neither their names.
+// Use index types:
 interface ErrorContainer {
-  // We could use: {email: 'Note a valid email', username: 'Must start with a character!'}
+  // We could use: {email: 'Not a valid email', username: 'Must start with a character!'}
   // Note in an obj you may have string, number or symbol as a property name, but not a boolean.
   [prop: string]: string;
   // We can add also predefined properties as long as they are of the same type.
@@ -188,7 +192,9 @@ interface ErrorContainer {
 }
 
 const errorBag: ErrorContainer = {
-  // 1: 'Not a valid email', // Also OK to use a number as name (it can be interpreted as a string) but not vice versa.
+  // 1: 'Not a valid email', // Also OK to use a number as name (it can be interpreted as a string),
+  // but not vice versa.
+  // So now you can put as many string properties as you need.
   email: 'Not a valid email',
   username: 'Must start with a character!'
 };

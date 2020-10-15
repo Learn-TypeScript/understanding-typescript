@@ -15,9 +15,9 @@ abstract class Department {
     return { name: name };
   }
 
-  // `this: Department` = describe has to be called by an obj of type: Department
+  // `this: Department` = describe() has to be called by an obj of type: Department
   abstract describe(this: Department): void;
-  // {
+  // { // no implementation when an abstract method.
   // console.log(`Deparment:  (${this.id}) ${this.name}`);
   // }
 
