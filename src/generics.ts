@@ -1,6 +1,6 @@
 // ----------------------
 // Build in generics
-// Array is a generic type and requires 1 type argument like eg string.
+// Array is a generic type and requires 1 type argument, e.g. string.
 // const names: Array<string> = [] //  the same like: string[]
 // names[0].split(' ')
 
@@ -47,7 +47,7 @@ function countAndDescribe<T extends Lengthy>(element: T): [T, string] {
 console.log(countAndDescribe('Hi there!'));
 
 //---------------------------------
-// The "keyof" constraint: U extends keyof T
+// The "keyof" constrain: U extends keyof T
 
 function extractAndConvert<T extends object, U extends keyof T>(obj: T, key: U) {
   return 'Value ' + obj[key];
@@ -57,7 +57,8 @@ extractAndConvert({ name: 'Max' }, 'name');
 
 //---------------------------------
 // Generic Classes
-// Note check also the last lecture: "Generic TYpes vs Union Types". It explains that with generics, we get an array
+// Note check also the last lecture: "Generic Types vs Union Types".
+// It explains that with generics, we get an array
 // that is either full with strings, or nubmers ...
 // But with Union Types, we get an array with mixed string, number etc values.
 // Even if we set it to be string[] etc, then we wouldn't be able to use addItem...
@@ -83,6 +84,7 @@ class DataStorage<T extends string | number | boolean> {
 }
 
 // Create different storages
+// Flexible but still strongly typed!
 const textStorage = new DataStorage<string>();
 textStorage.addItem('Max');
 textStorage.addItem('Manu');

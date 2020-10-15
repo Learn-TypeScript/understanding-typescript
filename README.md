@@ -243,10 +243,11 @@ Created by Maximilian Schwarzmüller
             - More on Advanced Types: https://www.typescriptlang.org/docs/handbook/advanced-types.html
 7.  - [**Generics**](https://www.typescriptlang.org/docs/handbook/generics.html#hello-world-of-generics)
         - Generics is a type which is connected to another type, so TS gives us better support. They give us flexibility with type safety.
-        - [Generic classes](https://www.typescriptlang.org/docs/handbook/generics.html#generic-classes): As we covered in our section on classes, a class has two sides to its type: the **static** side and the **instance** side. Generic **classes are only generic over their instance side** rather than their static side, so when working with classes, static members can not use the class’s type parameter.
+        - [Generic Constraints](https://www.typescriptlang.org/docs/handbook/generics.html#generic-constraints): ...you may sometimes want to write a generic function that works on a set of types where you have some knowledge about what capabilities that set of types will have.
+        - [Generic classes](https://www.typescriptlang.org/docs/handbook/generics.html#generic-classes): As we covered in our section on classes, a class has two sides to its type: the **static** side and the **instance** side. **Generic classes are only generic over their instance side** rather than their static side, so when working with classes, static members can not use the class’s type parameter.
         - [Utility Types](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype): Give extra type safety and flexibility. Check the docs for `Partial, Readconly` etc.
-            - Partial: Turns the properties of an object to optional.
-            - Readonly: Not allowed to add new properties to obj eg. 
+            - [Partial<Type>](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype): Constructs a type with all properties of Type set to optional. This utility will return a type that represents all subsets of a given type.
+            - [Readonly<Type>](https://www.typescriptlang.org/docs/handbook/utility-types.html#readonlytype): Constructs a type with all properties of Type set to readonly, meaning the properties of the constructed type cannot be reassigned.
         - These links might also be interesting:
             - More on Generics: https://www.typescriptlang.org/docs/handbook/generics.html
 8.  -**[Decorators](https://www.typescriptlang.org/docs/handbook/decorators.html#decorators)** 
