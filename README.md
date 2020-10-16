@@ -250,7 +250,7 @@ Created by Maximilian Schwarzmüller
             - [Readonly<Type>](https://www.typescriptlang.org/docs/handbook/utility-types.html#readonlytype): Constructs a type with all properties of Type set to readonly, meaning the properties of the constructed type cannot be reassigned.
         - These links might also be interesting:
             - More on Generics: https://www.typescriptlang.org/docs/handbook/generics.html
-8.  -**[Decorators](https://www.typescriptlang.org/docs/handbook/decorators.html#decorators)** 
+8.  - [**Decorators**](https://www.typescriptlang.org/docs/handbook/decorators.html#decorators)
         A Decorator is a special kind of declaration that can be attached to a 
             - `class declaration`, 
             - `method`, 
