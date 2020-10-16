@@ -298,4 +298,5 @@ Created by Maximilian Schwarzmüller
         - 112. Returning (and changing) a Class in a Class Decorator:
             - In decorators you can return the constructor of the class and even override it. Check `WithTemplate` in `app.ts`. Now the decorator runs not when the class is defined but when it's instantiated!
             - setters / getters and methods may also return something. eg a new property descriptor and change how the property is configured.
+        - [class-validator](https://github.com/typestack/class-validator)
         - More on Decorators: https://www.typescriptlang.org/docs/handbook/decorators.html
