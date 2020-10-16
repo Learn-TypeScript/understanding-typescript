@@ -265,13 +265,13 @@ Created by Maximilian Schwarzmüller
         - [Decorator Evaluation](https://www.typescriptlang.org/docs/handbook/decorators.html#decorator-evaluation) 
         There is a well defined order to how decorators applied to various declarations inside of a class are applied:
             - Parameter Decorators, followed by Method, Accessor, or Property Decorators are applied for each **instance** member.
-            - Parameter Decorators, followed by Method, Accessor, or Property Decorators are applied for each *static* member.
+            - Parameter Decorators, followed by Method, Accessor, or Property Decorators are applied for each **static** member.
             - Parameter Decorators are applied for the constructor.
             - Class Decorators are applied for the class.
-        - `Class Decorators` - Docs: A Class Decorator is declared just before a class declaration. The class decorator is applied to the `constructor` of the class and can be used to `observe`, `modify`, or `replace` a class definition. A class decorator **cannot** be used in a declaration file, or in any other ambient context (such as on a declare class).
+        - [Class Decorators](https://www.typescriptlang.org/docs/handbook/decorators.html#class-decorators): A Class Decorator is declared just before a class declaration. The class decorator is applied to the `constructor` of the class and can be used to `observe`, `modify`, or `replace` a class definition. A class decorator **cannot** be used in a declaration file, or in any other ambient context (such as on a declare class).
         - When adding a dec to an `instance` property of a class, the dec gets 2 arguments: 
             - 1. `target` = the istance property prototype. Note: if it was a static property, it would infer to the constructor function. 
-            - 2. `property name`: a string or sympol...
+            - 2. `property name`: a string or symbol...
         - `Property decorators` take 2 args: The first is `target` and it logs this:
             ```js
                 {constructor: ƒ, getPriceWithTax: ƒ}

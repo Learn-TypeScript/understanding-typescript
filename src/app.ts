@@ -23,18 +23,20 @@ function WithTemplate(template: string, hookId: string) {
   return function<T extends { new (...args: any[]): { name: string } }>(originalConstructor: T) {
     // create and return a class which creates a constructor.
     // In a class decorator we can return a constructor which depends on the old one
-    // so we can keep all the properties of the class, and will replace the old one.
+    // so we can keep all the properties of the class, and replace the old one.
     return class extends originalConstructor {
       // Add new functionality
       // ..._: we don't use args so TS should ignore it.
       constructor(..._: any[]) {
         // with super() we save the original constructor
         super();
-        // Now the template will be rendered to the DOM only if we instantiate an instance of the class.
+        // Now the template will be rendered to the DOM,
+        // only if we instantiate an instance of the class.
         // Not when it's just defined, like previously.
         console.log('WithTemplate... ', originalConstructor);
         // creates an instance of the class that is decorated.
         // const p = new originalConstructor(); // no need to call it anymore use `this`
+        // ... = this.name;
 
         const hookEl = document.getElementById(hookId);
         if (hookEl) {
@@ -56,7 +58,8 @@ class Person1 {
   }
 }
 
-// So now if we don't instantiate Person we don't get the insertion  the h1 to the div, ie Max.
+// So now if we don't instantiate Person we don't get the insertion the h1 to the div, ie Max.
+// But the decorator gets executed!
 // const pers = new Person1();
 // console.log(pers);
 
@@ -193,9 +196,9 @@ function Required(target: any, propName: string) {
   registeredValidators[target.constructor.name] = {
     // [...(registeredValidators[target.constructor.name] ? [propName] : []), 'required']
     // We first retrive any existing validators, then copy them into the array,
+    ...registeredValidators[target.constructor.name], // price or title
     // because if we had other validators for this prop they would be overrided.
     // If we have other validators add them, else add nothing ([]) and then add the 'required' validator.
-    ...registeredValidators[target.constructor.name], // price or title
     [propName]: [...(registeredValidators[target.constructor.name] ? [propName] : []), 'required']
   };
 }
