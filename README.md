@@ -121,10 +121,11 @@ Created by Maximilian Schwarzmüller
         let someValue: unknown = "this is a string";
         let strLength: number = (someValue as string).length;
         ```
-    - `Functions` as Types: eg `let combineValues: Function` or you can be more specifiek with `Function Types`: `let combineValues: (a: number, b: number) => number`. In this way you avoid assinging to `combineValues` e.g. a number.
+    - `Functions` as Types: eg `let combineValues: Function` or you can be more specifiek with `Function Types`:\
+    `let combineValues: (a: number, b: number) => number`. In this way you avoid assinging to `combineValues` e.g. a number.
     - `Function Types & Callbacks`: 
         ```js 
-        funtion addAndHandle(n1: number, n2: number, cb: (num: number) => void) {
+        function addAndHandle(n1: number, n2: number, cb: (num: number) => void) {
             const result = n1 + n2;
             cb(result)
         }
@@ -150,6 +151,7 @@ Created by Maximilian Schwarzmüller
 
         ```
     - `never` If a function doesn't return anything and also throws an error... then this function doesn't return anything eg `cb: (num: number) => never `
+
 3. **The TypeScript Compiler (and its Configuration)**
     - Check from the docs [Intro to the TSConfig Reference](https://www.typescriptlang.org/tsconfig)
     - [Configuring Watch](https://www.typescriptlang.org/docs/handbook/configuring-watch.html#configuring-file-watching-using-a-tsconfigjson) run `tsc app.ts -w` to enter watch mode. You can quit with `ctrl + C`. With watch mode you don't have to run `tsc fileName.ts` all the time. It runs automatically when saving the file.
@@ -194,9 +196,11 @@ Created by Maximilian Schwarzmüller
     - These links might also be interesting:
         - tsconfig Docs: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html
         - Compiler Config Docs: https://www.typescriptlang.org/docs/handbook/compiler-options.html
-        - VS Code TS Debugging: https://code.visualstudio.com/docs/typescript/typescript-debugging    
+        - VS Code TS Debugging: https://code.visualstudio.com/docs/typescript/typescript-debugging   
+
 4. **Next-generation JavaScript & TypeScript** 
     - About let, const etc...
+
 5.  - **Classes & Interfaces** ...
         - [Classes](https://www.typescriptlang.org/docs/handbook/classes.html)
         - [Interfaces](https://www.typescriptlang.org/docs/handbook/interfaces.html) One of TypeScript’s core principles is that type checking focuses on the shape that values have. This is sometimes called **“duck typing” or “structural subtyping”**. In TypeScript, interfaces fill the role of naming these types, and are a powerful way of defining contracts within your code as well as contracts with code outside of your project.
@@ -216,7 +220,7 @@ Created by Maximilian Schwarzmüller
         - Note from the docs: You’ll see that there are two syntaxes for building types: `Interfaces` and `Types`. **You should prefer interface**. Use type when you need specific features.
          - Differences between `interfaces` and `custom types`:
             1. Interfaces only describe the structure of an object. In custom types you can store also other things like `union types` etc. So when using an interface it's clear you want to describe the structure of an object.
-            2. You can implement an interface inside a class. It can be used as a contract a class can implement and then has to adhere to. Then you can share an interface among different classes. A class may implement multiple interfaces. 
+            2. You can implement an interface inside a class. It can be used as a contract a class can implement and then has to adhere to. Then you can share an interface among different classes and a class may implement multiple interfaces. 
             3. We can implement `Inheritance` in interfaces by extending in an interface another one, or even multiple.
             4. With Interfaces you can describe the structure of a function too. But probably it's a bit more common to use custom types.
             5. Interfaces: mark properties as optional by adding a `?` after the property. Note: You can also mark methods as optional: `myMethod?(){}`. And also parameters of methods...
@@ -241,6 +245,7 @@ Created by Maximilian Schwarzmüller
         - [Nullish Coalescing](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-7.html#nullish-coalescing): Manage nullish or undefined data.
         - These links might also be interesting:
             - More on Advanced Types: https://www.typescriptlang.org/docs/handbook/advanced-types.html
+
 7.  - [**Generics**](https://www.typescriptlang.org/docs/handbook/generics.html#hello-world-of-generics)
         - Generics is a type which is connected to another type, so TS gives us better support. They give us flexibility with type safety.
         - [Generic Constraints](https://www.typescriptlang.org/docs/handbook/generics.html#generic-constraints): ...you may sometimes want to write a generic function that works on a set of types where you have some knowledge about what capabilities that set of types will have.
@@ -250,6 +255,7 @@ Created by Maximilian Schwarzmüller
             - [Readonly<Type>](https://www.typescriptlang.org/docs/handbook/utility-types.html#readonlytype): Constructs a type with all properties of Type set to readonly, meaning the properties of the constructed type cannot be reassigned.
         - These links might also be interesting:
             - More on Generics: https://www.typescriptlang.org/docs/handbook/generics.html
+
 8.  - [**Decorators**](https://www.typescriptlang.org/docs/handbook/decorators.html#decorators)
         A Decorator is a special kind of declaration that can be attached to a 
             - `class declaration`, 
@@ -258,19 +264,19 @@ Created by Maximilian Schwarzmüller
             - `property`, or         
             - `parameter`. 
         - It's an instrument for writing code which is then easier to be used by other developers. eg one class gets used correctly, or do some hiden transformation. 
-        - A decorator is a function you apply to eg a class when the class is **defined**. It's not needed for the class to be instantiated.
+        - A decorator is a function you apply to e.g. a class when the class is **defined**. It's not needed for the class to be instantiated.
         - `Decorator Factories` gives us more power to configure what the decorator does internally. When we have multiple Decorator Factories assigned in a class the decorators get executed bottom up.
-        - You cannot use a decorator that is fine tuned for classes, elsewhere.
+        - You cannot use a decorator that is fine tuned for classes, elsewhere, like objects.
         - You can add decorators to: inctance property of a class, to a setter / getter, to a method, or a parameter.
         - [Decorator Evaluation](https://www.typescriptlang.org/docs/handbook/decorators.html#decorator-evaluation) 
-        There is a well defined order to how decorators applied to various declarations inside of a class are applied:
+        There is a well defined order to how decorators applied to various declarations inside of a class, are applied:
             - Parameter Decorators, followed by Method, Accessor, or Property Decorators are applied for each **instance** member.
             - Parameter Decorators, followed by Method, Accessor, or Property Decorators are applied for each **static** member.
             - Parameter Decorators are applied for the constructor.
             - Class Decorators are applied for the class.
         - [Class Decorators](https://www.typescriptlang.org/docs/handbook/decorators.html#class-decorators): A Class Decorator is declared just before a class declaration. The class decorator is applied to the `constructor` of the class and can be used to `observe`, `modify`, or `replace` a class definition. A class decorator **cannot** be used in a declaration file, or in any other ambient context (such as on a declare class).
         - When adding a dec to an `instance` property of a class, the dec gets 2 arguments: 
-            - 1. `target` = the istance property prototype. Note: if it was a static property, it would infer to the constructor function. 
+            - 1. `target` = the istance property `prototype`. Note: if it was a static property, it would infer to the `constructor` function. 
             - 2. `property name`: a string or symbol...
         - `Property decorators` take 2 args: The first is `target` and it logs this:
             ```js
@@ -280,9 +286,9 @@ Created by Maximilian Schwarzmüller
                 set Price: ƒ Price(val)
                 __proto__: Object
             ```
-            - The second arg is the property name.
+            - The second arg is the property `name`.
             - A property decorator can only be used to observe that a property of a specific name has been declared for a class - there is no descriptor.
-        - `Accessor  decorators` take 3 args: The first two are the same as Propetry dec. The 3d is the `PropetryDescriptor` which is eg for a setter:
+        - `Accessor  decorators` take 3 args: The first two are the same as Propetry dec. The 3d is the `PropetryDescriptor` which is e.g. for a setter:
                 ```js
                     {get: undefined, enumerable: false, configurable: true, set: ƒ}
                         configurable: true
@@ -293,8 +299,8 @@ Created by Maximilian Schwarzmüller
                 ```
             - NOTE: TypeScript disallows decorating both the get and set accessor for a single member (docs).
         - [Method decorators](https://www.typescriptlang.org/docs/handbook/decorators.html#method-decorators) take also 3 arguments and are the same as `Accessor decs`.
-        - `Parameter Decorators`: They take 3 args ...and the 3d is the ordinal index of the parameter in the function’s parameter list (docs).
-        - What is the order that decorators run? They all execute when the class they are assigned to is defined and the methods are registed etc! They don't run when the class is instanciated. They just allow you to do additional work behind the sceens. e.g. setup code that should run when a method is called.
+        - `Parameter Decorators`: They take 3 args ...and the 3d is the ordinal index of the parameter in the function’s parameter list [docs](https://www.typescriptlang.org/docs/handbook/decorators.html#parameter-decorators).
+        - What is the order that decorators run? They all execute when the class they are assigned to is defined and the methods are registered etc! They don't run when the class is instanciated. They just allow you to do additional work behind the sceens. e.g. setup code that should run when a method is called.
         - 112. Returning (and changing) a Class in a Class Decorator:
             - In decorators you can return the constructor of the class and even override it. Check `WithTemplate` in `app.ts`. Now the decorator runs not when the class is defined but when it's instantiated!
             - setters / getters and methods may also return something. eg a new property descriptor and change how the property is configured.

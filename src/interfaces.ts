@@ -21,7 +21,7 @@ interface Named {
   outputName?: string;
 }
 
-// interface Greetable extends Named, AnoherInterface, etc {
+// interface Greetable extends Named, AnotherInterface, etc {
 interface Greetable extends Named {
   greet(phrase: string): void;
 }

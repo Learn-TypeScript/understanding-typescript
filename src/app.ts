@@ -9,7 +9,7 @@ console.log('Decorators');
 // The advandage is that we can pass in values: @Logger('Logging - Person1')
 function Logger(logString: string) {
   console.log('LOGGER FACTORY');
-  return function(constructor: Function) {
+  return function (constructor: Function) {
     console.log('Logging... ' + constructor);
     console.log('logString... ' + logString);
   };
@@ -20,7 +20,7 @@ function WithTemplate(template: string, hookId: string) {
   console.log('TEMPLATE FACTORY');
   // {new(...args: any[]): {name: string}} : It's an object that can be created by using `new`.
   // So it's a constructor function.
-  return function<T extends { new (...args: any[]): { name: string } }>(originalConstructor: T) {
+  return function <T extends { new (...args: any[]): { name: string } }>(originalConstructor: T) {
     // create and return a class which creates a constructor.
     // In a class decorator we can return a constructor which depends on the old one
     // so we can keep all the properties of the class, and replace the old one.
@@ -140,9 +140,9 @@ function Autobind(_: any, _2: string, descriptor: PropertyDescriptor) {
     configurable: true,
     enumerable: false,
     get() {
-      const boundFn = originalMethod.bind(this); // `this` of `get()` is the `Printer` which triggers the getter.
+      const boundFn = originalMethod.bind(this); // `this` of `get()` is referst to the `Printer` which triggers the getter.
       return boundFn;
-    }
+    },
   };
   return adjDescriptor;
 }
@@ -160,8 +160,8 @@ const p = new Printer();
 
 const button = document.querySelector('button')!; // ! tells TS that the button exists. It's not null.
 // Use bind, other wise `this` will refer to the target of the event, ie `button`.
-// But with `@Autobind` decorator, we don't need `bind`
 // button.addEventListener('click', p.showMessage.bind(p));
+// But with `@Autobind` decorator, we don't need `bind`
 button.addEventListener('click', p.showMessage);
 
 // ------------------------------
@@ -184,7 +184,7 @@ interface ValidatorConfig {
 const registeredValidators: ValidatorConfig = {};
 
 // With the Decorators we'll add validators to the registeredValidators.
-// This is what target returns (above).
+// This is what target returns.
 // So `target.constructor.name` returns the name of the class.
 /* constructor: class Product
 arguments: (...)
@@ -199,14 +199,14 @@ function Required(target: any, propName: string) {
     ...registeredValidators[target.constructor.name], // price or title
     // because if we had other validators for this prop they would be overrided.
     // If we have other validators add them, else add nothing ([]) and then add the 'required' validator.
-    [propName]: [...(registeredValidators[target.constructor.name] ? [propName] : []), 'required']
+    [propName]: [...(registeredValidators[target.constructor.name] ? [propName] : []), 'required'],
   };
 }
 
 function PositiveNumber(target: any, propName: string) {
   registeredValidators[target.constructor.name] = {
     ...registeredValidators[target.constructor.name],
-    [propName]: [...(registeredValidators[target.constructor.name] ? [propName] : []), 'positive']
+    [propName]: [...(registeredValidators[target.constructor.name] ? [propName] : []), 'positive'],
   };
 }
 
@@ -252,7 +252,7 @@ class Course {
 }
 
 const courseForm = document.querySelector('form')!;
-courseForm.addEventListener('submit', event => {
+courseForm.addEventListener('submit', (event) => {
   event.preventDefault(); // so we don't submit the form and don't send HTTP request.
   const titleEl = document.getElementById('title') as HTMLInputElement;
   const priceEl = document.getElementById('price') as HTMLInputElement;
