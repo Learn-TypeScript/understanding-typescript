@@ -6,6 +6,7 @@ abstract class Department {
   protected employees: string[] = [];
 
   // constructor method
+  // If you use an access modifier, like 'protected', then you don't need to use fields and initialize them.
   // readonly exist only in TS
   constructor(protected readonly id: string, public name: string) {
     // this.name = n;
@@ -35,7 +36,7 @@ class ITDepartment extends Department {
   admins: string[];
 
   constructor(id: string, admins: string[]) {
-    super(id, 'IT');
+    super(id, 'IT'); // super comes first
     this.admins = admins;
   }
   describe() {

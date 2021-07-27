@@ -221,7 +221,7 @@ Created by Maximilian Schwarzmüller
 
 5. - **Classes & Interfaces** ...
 
-     - [Classes](https://www.typescriptlang.org/docs/handbook/classes.html)
+     - [Classes](https://www.typescriptlang.org/docs/handbook/2/classes.html)
      - [Interfaces](https://www.typescriptlang.org/docs/handbook/interfaces.html) One of TypeScript’s core principles is that type checking focuses on the shape that values have. This is sometimes called **“duck typing” or “structural subtyping”**. In TypeScript, interfaces fill the role of naming these types, and are a powerful way of defining contracts within your code as well as contracts with code outside of your project.
      - [Readonly](https://www.typescriptlang.org/docs/handbook/interfaces.html#readonly-properties) TypeScript comes with a `ReadonlyArray<T> `type that is the same as `Array<T> `with all mutating methods removed, so you can make sure you don’t change your arrays after creation:
 
