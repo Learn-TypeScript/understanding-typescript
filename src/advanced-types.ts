@@ -19,7 +19,7 @@ type ElevatedEmployee = Admin & Employee;
 const e1: ElevatedEmployee = {
   name: 'Max',
   privileges: ['create-server'],
-  startDate: new Date()
+  startDate: new Date(),
 };
 
 // ------------------------
@@ -56,7 +56,7 @@ result3.split(' '); // with function overload TS can infer that the return type 
 const fetchedUserData = {
   id: 'u1',
   name: 'Max',
-  job: { title: 'CEO', description: 'My own company' } // imagine you get this from a back end
+  job: { title: 'CEO', description: 'My own company' }, // imagine you get this from a back end
 };
 
 console.log(fetchedUserData?.job?.title); // Optional chaning
@@ -65,7 +65,7 @@ console.log(fetchedUserData?.job?.title); // Optional chaning
 // Nullish Coalescing:
 
 // try the following: null, undefined, ''
-// Note:  an empty string would be fasly so in case of ` '' || DEFAULT `  DEFAULT will be printed out.
+// Note:  an empty string would be falsy so in case of ` '' || DEFAULT `  DEFAULT will be printed out.
 const userInput = '';
 
 // const storedData = userInput || 'DEFAULT'; // with || the empty string is falsy so we get DEFAULT
@@ -76,9 +76,9 @@ console.log(storedData);
 
 // Type Guards 2.
 
-type UnknownenEmployee = Employee | Admin;
+type UnknownEmployee = Employee | Admin;
 
-function printEmployeeInformation(emp: UnknownenEmployee) {
+function printEmployeeInformation(emp: UnknownEmployee) {
   console.log('Name ' + emp.name);
   // Problem UnknownEmployee could be a normal Employee that has no privileges.
   // and we cannot fix it with typeof
@@ -159,11 +159,10 @@ function moveAnimal(animal: Animal) {
   console.log('Moving with speed: ' + speed);
 }
 
-moveAnimal({ type: 'bird', flyingSpeed: 10 });
+moveAnimal({ type: 'horse', runningSpeed: 10 });
 
 // ---------------------
 // Type casting
-
 // One way:
 // const userInputElement = <HTMLInputElement>document.getElementById('user-input')!;
 // Most common way:
@@ -173,19 +172,19 @@ const userInputElement = document.getElementById('user-input') as HTMLInputEleme
 //     (userInputElement as HTMLInputElement).value = 'Hi there';
 // }
 
-userInputElement.value = 'Hi there';
+// userInputElement.value = 'Hi there';
 
 // -----------------------------------
 // Index Properties:
 
 // Validate input fields and show some proper message if error occurs.
-// Let interface be generic so you can check differnt type of fields (not only email and userName).
+// Let interface be generic so you can check different type of fields (not only email and userName).
 // The values should be string, but we don't want to specify the number of the properties,
 // neither their names.
 // Use index types:
 interface ErrorContainer {
   // We could use: {email: 'Not a valid email', username: 'Must start with a character!'}
-  // Note in an obj you may have string, number or symbol as a property name, but not a boolean.
+  // Note: in an obj you may have string, number or symbol as a property name, but not a boolean.
   [prop: string]: string;
   // We can add also predefined properties as long as they are of the same type.
   // id: string;
@@ -196,5 +195,5 @@ const errorBag: ErrorContainer = {
   // but not vice versa.
   // So now you can put as many string properties as you need.
   email: 'Not a valid email',
-  username: 'Must start with a character!'
+  username: 'Must start with a character!',
 };

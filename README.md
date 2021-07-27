@@ -221,44 +221,40 @@ Created by Maximilian Schwarzmüller
 
 5. - **Classes & Interfaces** ...
 
-     - [Classes](https://www.typescriptlang.org/docs/handbook/2/classes.html)
-     - [Interfaces](https://www.typescriptlang.org/docs/handbook/interfaces.html) One of TypeScript’s core principles is that type checking focuses on the shape that values have. This is sometimes called **“duck typing” or “structural subtyping”**. In TypeScript, interfaces fill the role of naming these types, and are a powerful way of defining contracts within your code as well as contracts with code outside of your project.
-     - [Readonly](https://www.typescriptlang.org/docs/handbook/interfaces.html#readonly-properties) TypeScript comes with a `ReadonlyArray<T> `type that is the same as `Array<T> `with all mutating methods removed, so you can make sure you don’t change your arrays after creation:
+   - [Classes](https://www.typescriptlang.org/docs/handbook/2/classes.html)
+   - [Interfaces](https://www.typescriptlang.org/docs/handbook/interfaces.html) One of TypeScript’s core principles is that type checking focuses on the shape that values have. This is sometimes called **“duck typing” or “structural subtyping”**. In TypeScript, interfaces fill the role of naming these types, and are a powerful way of defining contracts within your code as well as contracts with code outside of your project.
+   - [Readonly](https://www.typescriptlang.org/docs/handbook/interfaces.html#readonly-properties) TypeScript comes with a `ReadonlyArray<T> `type that is the same as `Array<T> `with all mutating methods removed, so you can make sure you don’t change your arrays after creation:
 
-     ```js
-          interface Point {
-            readonly x: number;
-            readonly y: number;
-          }
-         ...
-         let a: number[] = [1, 2, 3, 4];
-         let ro: ReadonlyArray<number> = a;
+   ```js
+        interface Point {
+          readonly x: number;
+          readonly y: number;
+        }
+       ...
+       let a: number[] = [1, 2, 3, 4];
+       let ro: ReadonlyArray<number> = a;
 
-         ro[0] = 12; // error!
-     ```
+       ro[0] = 12; // error!
+   ```
 
-     - An interface describes the structure of an object. Use it to type-check an object. But why not use just `custom types` then?
-     - Note from the docs: You’ll see that there are two syntaxes for building types: `Interfaces` and `Types`. **You should prefer interface**. Use type when you need specific features.
-     - Differences between `interfaces` and `custom types`:
-       1. Interfaces only describe the structure of an object. In custom types you can store also other things like `union types` etc. So when using an interface it's clear you want to describe the structure of an object.
-       2. You can implement an interface inside a class. It can be used as a contract a class can implement and then has to adhere to. Then you can share an interface among different classes and a class may implement multiple interfaces.
-       3. We can implement `Inheritance` in interfaces by extending in an interface another one, or even multiple.
-       4. With Interfaces you can describe the structure of a function too. But probably it's a bit more common to use custom types.
-       5. Interfaces: mark properties as optional by adding a `?` after the property. Note: You can also mark methods as optional: `myMethod?(){}`. And also parameters of methods...
+   - An interface describes the structure of an object. Use it to type-check an object. But why not use just `custom types` then?
+   - Note from the docs: You’ll see that there are two syntaxes for building types: `Interfaces` and `Types`. **You should prefer interface**. Use type when you need specific features.
+   - Differences between `interfaces` and `custom types`:
+     1. Interfaces only describe the structure of an object. In custom types you can store also other things like `union types` etc. So when using an interface it's clear you want to describe the structure of an object.
+     2. You can implement an interface inside a class. It can be used as a contract a class can implement and then has to adhere to. Then you can share an interface among different classes and a class may implement multiple interfaces.
+     3. We can implement `Inheritance` in interfaces by extending in an interface another one, or even multiple.
+     4. With Interfaces you can describe the structure of a function too. But probably it's a bit more common to use custom types.
+     5. Interfaces: mark properties as optional by adding a `?` after the property. Note: You can also mark methods as optional: `myMethod?(){}`. And also parameters of methods...
 
-   - These links might also be interesting:
-     - More on (JS) Classes: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
-     - More on TS Interfaces: https://www.typescriptlang.org/docs/handbook/interfaces.html
-
-6. - [**Advanced Types**](https://www.typescriptlang.org/docs/handbook/advanced-types.html)
-   - Intersection types: Allow as to combine other types. They are close related to interface inheritance. But with interfaces we use more code. Note: You can use intersection types not only with objects but with any types. eg with union types you get the types that 2 union types have in common. Check: [Intersection Types](https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#intersection-types)
-   - [Type Guards and Differentiating Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-guards-and-differentiating-types):
+6. - [**Advanced Types**](https://www.typescriptlang.org/docs/handbook/2/types-from-types.html)
+   - `Intersection types:` Allow as to combine other types. They are close related to interface inheritance. But with interfaces we use more code. Note: You can use intersection types not only with objects but with any types. e.g. with union types you get the types that 2 union types have in common. Check: [Intersection Types](https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#intersection-types)
+   - [Type Guards and Differentiating Types](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#typeof-type-guards):
      1. `typeof`
      2. `in`
      3. `instanceof`
-   - [Discriminated Unions](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-func.html#discriminated-unions): It's a pattern to use with union types and make working with type guards easier.
-   - Type Casting: You can say TS that some value is of specifiek type!
-   - Index Properties: Allows to create objects that are more flexible regarding the properties they might hold. Check also [Index types](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types)
+   - [Discriminated Unions](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#discriminated-unions): It's a pattern to use with union types and make working with type guards easier.
+   - `Type Casting:` You can say TS that some value is of specifiek type!
+   - `Index Properties:` Allows to create objects that are more flexible regarding the properties they might hold. Check also [Index types](https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html)
    - [Function Overloads](https://www.typescriptlang.org/docs/handbook/2/functions.html#function-overloads): Allows us to define multiple function signatures, for one function. ie multiple ways of calling a function with different parameters. Use it when TS cannot infer correctly the return type.
      - [Ordering](https://www.typescriptlang.org/docs/handbook/declaration-files/do-s-and-don-ts.html#ordering):
        - Don’t put more general overloads before more specific overloads.
