@@ -4,6 +4,8 @@ Don't limit the Usage of TypeScript to Angular! Learn the Basics, its Features, 
 
 Created by Maximilian Schwarzmüller
 
+Repetitions: 2
+
 ### Notes:
 
 - In the beginning we had to run `tsc fileName.ts` to compile the ts code to js. Then we used the watch mode. To enter watch mode, run:

@@ -23,7 +23,7 @@ const e1: ElevatedEmployee = {
 };
 
 // ------------------------
-// Function overload
+// Function overload (last topic)
 type Combinable = string | number;
 type Numeric = number | boolean;
 
@@ -94,6 +94,7 @@ function printEmployeeInformation(emp: UnknownEmployee) {
 
 printEmployeeInformation(e1);
 
+// Type Guards 3.
 class Car {
   drive() {
     console.log('Driving...');
@@ -115,7 +116,6 @@ type Vehicle = Car | Truck;
 const v1 = new Car();
 const v2 = new Truck();
 
-// Type Guards 3.
 function useVehicle(vehicle: Vehicle) {
   vehicle.drive();
   // type guard using `instanceof`
@@ -142,6 +142,7 @@ type Animal = Bird | Horse;
 
 function moveAnimal(animal: Animal) {
   // We cannot work with instanceof because Bird is an interface and it does not compile to JS
+  // But we can use 'in'
   // if ('flyingSpeed' in animal) {
   //     console.log('Moving with speed: ' + animal.flyingSpeed);
   // }
@@ -168,11 +169,11 @@ moveAnimal({ type: 'horse', runningSpeed: 10 });
 // Most common way:
 const userInputElement = document.getElementById('user-input') as HTMLInputElement;
 
-// if (userInputElement) {
-//     (userInputElement as HTMLInputElement).value = 'Hi there';
-// }
+if (userInputElement) {
+  (userInputElement as HTMLInputElement).value = 'Hi there';
+}
 
-// userInputElement.value = 'Hi there';
+userInputElement.value = 'Hi there';
 
 // -----------------------------------
 // Index Properties:
