@@ -20,7 +20,7 @@ Repetitions: 2
 
   - `tsc -w`
 
-1. **Getting Started**
+1. ### Getting Started
 
    - What is TS:
      - TS is a JavaScript superset. Adds new features and advantages to JS. A language building up on JS.
@@ -43,7 +43,7 @@ Repetitions: 2
            },
        ```
 
-2. **TypeScript Basics & Basic Types**
+2. ### TypeScript Basics & Basic Types
 
    - Core Types:
      - `number` no floats etc.
@@ -175,7 +175,7 @@ Repetitions: 2
 
    - `never` If a function doesn't return anything and also throws an error... then this function doesn't return anything eg `cb: (num: number) => never `
 
-3. **The TypeScript Compiler (and its Configuration)**
+3. ### The TypeScript Compiler (and its Configuration)
 
    - Check from the docs [Intro to the TSConfig Reference](https://www.typescriptlang.org/tsconfig)
    - [Configuring Watch](https://www.typescriptlang.org/docs/handbook/configuring-watch.html#configuring-file-watching-using-a-tsconfigjson) run `tsc app.ts -w` to enter watch mode. You can quit with `ctrl + C`. With watch mode you don't have to run `tsc fileName.ts` all the time. It runs automatically when saving the file.
@@ -217,11 +217,11 @@ Repetitions: 2
   - Compiler Config Docs: https://www.typescriptlang.org/docs/handbook/compiler-options.html
   - VS Code TS Debugging: https://code.visualstudio.com/docs/typescript/typescript-debugging
 
-4. **Next-generation JavaScript & TypeScript**
+4. ### Next-generation JavaScript & TypeScript
 
    - About let, const etc...
 
-5. - **Classes & Interfaces** ...
+5. ### Classes & Interfaces ...
 
    - [Classes](https://www.typescriptlang.org/docs/handbook/2/classes.html)
    - [Interfaces](https://www.typescriptlang.org/docs/handbook/interfaces.html) One of TypeScript’s core principles is that type checking focuses on the shape that values have. This is sometimes called **“duck typing” or “structural subtyping”**. In TypeScript, interfaces fill the role of naming these types, and are a powerful way of defining contracts within your code as well as contracts with code outside of your project.
@@ -248,7 +248,8 @@ Repetitions: 2
      4. With Interfaces you can describe the structure of a function too. But probably it's a bit more common to use custom types.
      5. Interfaces: mark properties as optional by adding a `?` after the property. Note: You can also mark methods as optional: `myMethod?(){}`. And also parameters of methods...
 
-6. - [**Advanced Types**](https://www.typescriptlang.org/docs/handbook/2/types-from-types.html)
+6. ### [Advanced Types](https://www.typescriptlang.org/docs/handbook/2/types-from-types.html)
+
    - `Intersection types:` Allow as to combine other types. They are close related to interface inheritance. But with interfaces we use more code. Note: You can use intersection types not only with objects but with any types. e.g. with union types you get the types that 2 union types have in common. Check: [Intersection Types](https://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#intersection-types)
    - [Type Guards and Differentiating Types](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#typeof-type-guards):
      1. `typeof`
@@ -267,19 +268,18 @@ Repetitions: 2
    - These links might also be interesting:
      - More on Advanced Types: https://www.typescriptlang.org/docs/handbook/advanced-types.html
 
-7. - [**Generics**](https://www.typescriptlang.org/docs/handbook/generics.html#hello-world-of-generics)
+7. ### [Generics](https://www.typescriptlang.org/docs/handbook/2/generics.html)
+
    - Generics is a type which is connected to another type, so TS gives us better support. They give us flexibility with type safety.
-   - [Generic Constraints](https://www.typescriptlang.org/docs/handbook/generics.html#generic-constraints): ...you may sometimes want to write a generic function that works on a set of types where you have some knowledge about what capabilities that set of types will have.
+   - [Generic Constraints](https://www.typescriptlang.org/docs/handbook/2/generics.html#generic-constraints): ...you may sometimes want to write a generic function that works on a set of types where you have some knowledge about what capabilities that set of types will have.
    - [Generic classes](https://www.typescriptlang.org/docs/handbook/generics.html#generic-classes): As we covered in our section on classes, a class has two sides to its type: the **static** side and the **instance** side. **Generic classes are only generic over their instance side** rather than their static side, so when working with classes, static members can not use the class’s type parameter.
    - [Utility Types](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype): Give extra type safety and flexibility. Check the docs for `Partial, Readconly` etc.
      - [Partial<Type>](https://www.typescriptlang.org/docs/handbook/utility-types.html#partialtype): Constructs a type with all properties of Type set to optional. This utility will return a type that represents all subsets of a given type.
      - [Readonly<Type>](https://www.typescriptlang.org/docs/handbook/utility-types.html#readonlytype): Constructs a type with all properties of Type set to readonly, meaning the properties of the constructed type cannot be reassigned.
-   - These links might also be interesting:
-     - More on Generics: https://www.typescriptlang.org/docs/handbook/generics.html
 
-8. - [**Decorators**](https://www.typescriptlang.org/docs/handbook/decorators.html#decorators)
-     A Decorator is a special kind of declaration that can be attached to a - `class declaration`, - `method`, - `accessor`, - `property`, or
-     - `parameter`.
+8. ### [Decorators](https://www.typescriptlang.org/docs/handbook/decorators.html#decorators)
+   A Decorator is a special kind of declaration that can be attached to a - `class declaration`, - `method`, - `accessor`, - `property`, or
+   - `parameter`.
    - It's an instrument for writing code which is then easier to be used by other developers. eg one class gets used correctly, or do some hiden transformation.
    - A decorator is a function you apply to e.g. a class when the class is **defined**. It's not needed for the class to be instantiated.
    - `Decorator Factories` gives us more power to configure what the decorator does internally. When we have multiple Decorator Factories assigned in a class the decorators get executed bottom up.

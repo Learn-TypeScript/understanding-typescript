@@ -1,15 +1,15 @@
 // ----------------------
-// Build in generics
+// Build-in generics
 // Array is a generic type and requires 1 type argument, e.g. string.
 // const names: Array<string> = [] //  the same like: string[]
 // names[0].split(' ')
 
 // Promises are also generic
-// // Give generic type so TS knows what this function will wield.
+// // Give a generic type, so TS will know what this function will wield.
 // const promise: Promise<string> = new Promise((resolve, reject) => {
 //     setTimeout( () => {
 //         resolve('This is done!')
-//     } , 2000)
+//     } , 20
 // })
 
 // promise.then(data => {
@@ -45,9 +45,10 @@ function countAndDescribe<T extends Lengthy>(element: T): [T, string] {
 }
 
 console.log(countAndDescribe('Hi there!'));
+console.log(countAndDescribe([1, 2, 3, 4]));
 
 //---------------------------------
-// The "keyof" constrain: U extends keyof T
+// The "keyof" constrains: U extends keyof T
 
 function extractAndConvert<T extends object, U extends keyof T>(obj: T, key: U) {
   return 'Value ' + obj[key];
@@ -91,8 +92,8 @@ textStorage.addItem('Manu');
 textStorage.removeItem('Max');
 console.log(textStorage.getItems());
 
-const textStorage2 = new DataStorage<number>();
-const textStorage3 = new DataStorage<number | string>();
+const numberStorage = new DataStorage<number>();
+const numStrStorage = new DataStorage<number | string>();
 
 // Working with objects:
 // Objects work with reference types.
@@ -114,8 +115,7 @@ const textStorage3 = new DataStorage<number | string>();
 // console.log(objStorage.getItems());
 
 //---------------------------------
-// Generic Utility Types:
-// Partial
+// Generic Utility Types: Partial
 interface CourseGoal {
   title: string;
   description: string;
