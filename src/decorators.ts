@@ -1,6 +1,5 @@
-console.log('Decorators');
-
 // This is a decorator. Common to start with capital letter.
+// Note: Decorators always have argument(s).
 // function Logger(constructor: Function) {
 //     console.log('Logger... ', constructor);
 // };
@@ -60,37 +59,42 @@ class Person1 {
 
 // So now if we don't instantiate Person we don't get the insertion the h1 to the div, ie Max.
 // But the decorator gets executed!
-// const pers = new Person1();
-// console.log(pers);
+const pers = new Person1();
+console.log(pers);
 
 // ------------------------------
 // 109. Diving into Property Decorators
+/* Decorators run when the class is defined. 
+You can use them to do some behind the sceens work, 
+like add extra meta-data, or store some data about a property somewhere else. */
 console.log('// ------------------------------');
 console.log('Diving into Property Decorators');
 
 // For property
+// target = the prototype of our object (unless you put the decorator to a static method, then it will be the constructor)
 function Log(target: any, propertyName: string | Symbol) {
   console.log('Property decorator!, target ', target);
   console.log('Property decorator! propertyName ', propertyName);
 }
 
-// For `set` accessor
+// For `set` accessor (Note: you may return a new property descriptor with this decorator)
 function Log2(target: any, name: string, descriptor: PropertyDescriptor) {
   console.log('Accessor dec!, target ', target);
   console.log('Accessor! name ', name);
   console.log('Accessor! descriptor ', descriptor);
 }
 
-// For a method
-function Log3(target: any, name: string, descriptor: PropertyDescriptor) {
+// For a method (Note: you may return a new property descriptor with this decorator)
+// target = the prototype of our object (unless you put the decorator to a static method, then it will be the constructor)
+function Log3(target: any, name: string | Symbol, descriptor: PropertyDescriptor) {
   console.log('Method dec!, target ', target);
   console.log('Method! name ', name);
   console.log('Method! descriptor ', descriptor);
 }
 
 // For method Parameter. Note `name` is the name of the method
-// `target` is the costructor of the class.
-function Log4(target: any, name: string, position: number) {
+// `target` is the prototype of the class.
+function Log4(target: any, name: string | Symbol, position: number) {
   console.log('Parameter!, target ', target);
   console.log('Parameter! name ', name);
   console.log('Parameter! position ', position);
@@ -129,10 +133,12 @@ console.log('114. Example: Creating an "Autobind" Decorator');
 // _: any, _2: string, this means we're not interested in `target` and `name`.
 function Autobind(_: any, _2: string, descriptor: PropertyDescriptor) {
   // check the log of the PropertyDescriptor of the Method dec! to see what `value` is.
-  /* enumerable: false
-  value: ƒ getPriceWithTax(tax)
+  console.log('descriptor', descriptor);
+  /* configurable: true
+  enumerable: false
+  value: ƒ showMessage()
   writable: true
-  __proto__: Object */
+  */
   const originalMethod = descriptor.value; // get the function
   console.log('originalMethod', originalMethod);
 
@@ -140,7 +146,7 @@ function Autobind(_: any, _2: string, descriptor: PropertyDescriptor) {
     configurable: true,
     enumerable: false,
     get() {
-      const boundFn = originalMethod.bind(this); // `this` of `get()` is referst to the `Printer` which triggers the getter.
+      const boundFn = originalMethod.bind(this); // `this` of `get()` refers to the `Printer` which triggers the getter.
       return boundFn;
     },
   };
@@ -197,8 +203,8 @@ function Required(target: any, propName: string) {
     // [...(registeredValidators[target.constructor.name] ? [propName] : []), 'required']
     // We first retrive any existing validators, then copy them into the array,
     ...registeredValidators[target.constructor.name], // price or title
-    // because if we had other validators for this prop they would be overrided.
-    // If we have other validators add them, else add nothing ([]) and then add the 'required' validator.
+    // because if we had other validators for this prop they would be overriden.
+    // If we have other validators, add them, else add nothing ([]) and then add the 'required' validator.
     [propName]: [...(registeredValidators[target.constructor.name] ? [propName] : []), 'required'],
   };
 }

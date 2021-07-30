@@ -278,10 +278,10 @@ Repetitions: 2
      - [Readonly<Type>](https://www.typescriptlang.org/docs/handbook/utility-types.html#readonlytype): Constructs a type with all properties of Type set to readonly, meaning the properties of the constructed type cannot be reassigned.
 
 8. ### [Decorators](https://www.typescriptlang.org/docs/handbook/decorators.html#decorators)
-   A Decorator is a special kind of declaration that can be attached to a - `class declaration`, - `method`, - `accessor`, - `property`, or
-   - `parameter`.
+   - A Decorator is a special kind of declaration that can be attached to a - `class declaration`, - `method`, - `accessor`, - `property`, or
+     `parameter`. And it takes arguments.
    - It's an instrument for writing code which is then easier to be used by other developers. eg one class gets used correctly, or do some hiden transformation.
-   - A decorator is a function you apply to e.g. a class when the class is **defined**. It's not needed for the class to be instantiated.
+   - A decorator is a function you may apply to a class when the class is **defined**. It's not needed for the class to be instantiated.
    - `Decorator Factories` gives us more power to configure what the decorator does internally. When we have multiple Decorator Factories assigned in a class the decorators get executed bottom up.
    - You cannot use a decorator that is fine tuned for classes, elsewhere, like objects.
    - You can add decorators to: inctance property of a class, to a setter / getter, to a method, or a parameter.
